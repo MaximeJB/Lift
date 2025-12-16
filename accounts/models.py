@@ -17,7 +17,7 @@ class CustomUser(AbstractUser):
     updated_at = models.DateTimeField(auto_now=True)
     synced_at = models.DateTimeField(null=True, blank=True)
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username']
+    REQUIRED_FIELDS = ['email']
 
 
     def __str__(self):

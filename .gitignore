@@ -6,3 +6,7 @@ venv
 spec.md
 .claude/
 .vscode
+wiggly-coalescing-badger.md
+TODOLIST.md
+todo0212.md
+db.sqlite3
