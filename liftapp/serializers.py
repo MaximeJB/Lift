@@ -1,6 +1,5 @@
 from rest_framework import serializers
-
-from liftapp.models import CustomUser
+from accounts.models import CustomUser
 
 
 class CustomUserSerializer(serializers.ModelSerializer):

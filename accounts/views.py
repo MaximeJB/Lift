@@ -1,8 +1,10 @@
 from accounts.models import CustomUser
-from accounts.serializers import UserRegistrationSerializer
+from accounts.serializers import LoginSerializer, PrivateUserSerializer, UserRegistrationSerializer
 from rest_framework import generics
+from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.views import APIView
+from rest_framework.permissions import IsAuthenticated
 
 class RegisterView(generics.CreateAPIView):
     queryset = CustomUser.objects.all()
@@ -31,7 +33,6 @@ def get_tokens_for_user(user):
     }
 
 class LoginView(APIView):
-    permission_classes = [AllowAny]
     def post(self, request):
         # 1. Validate credentials using the LoginSerializer
         ser = LoginSerializer(data=request.data)
@@ -47,5 +48,15 @@ class LoginView(APIView):
         return Response({
             'access': str(refresh.access_token), 
             'refresh': str(refresh), 
-            'user': {'id': user.id, 'username': user.username, 'email': user.email, 'email_verified': user.email_verified}
+            'user': {'id': user.id, 'pseudo': user.pseudo, 'email': user.email, 'email_verified': user.email_verified}
         })
+    
+class UserProfileView(generics.RetrieveUpdateAPIView):
+    serializer_class = PrivateUserSerializer
+    queryset = CustomUser.objects.all()
+    permission_classes = [IsAuthenticated]
+
+    def get_object(self):
+        return self.request.user
+    
+    

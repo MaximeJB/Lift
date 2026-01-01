@@ -17,7 +17,7 @@ class WeightLog(models.Model):
         MaxValueValidator(200)])
     logged_at = models.DateTimeField(default= timezone.now)
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='weight_logs')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     synced_at = models.DateTimeField(null=True, blank=True)
