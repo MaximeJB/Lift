@@ -4,7 +4,6 @@ import uuid
 from accounts.models import CustomUser
 
 
-
 class BeltPromotion(models.Model):
     belt_choices = [
     ("WHITE", "Public"),
@@ -16,7 +15,7 @@ class BeltPromotion(models.Model):
     ("Black", "Black")]
     
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    promotion_date = models.DateField()
+    promotion_date = models.DateField(default='2025-01-01')
     academy = models.CharField(max_length=300, blank=True, null=True)
     notes = models.CharField(max_length=600, blank=True, null=True)
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='belt_promotions')
