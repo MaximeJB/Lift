@@ -21,6 +21,7 @@ class Exercise(models.Model):
     ('CORE', 'Core'),
     ('FULL_BODY', 'Full Body'),
     ('FOREARMS', 'Forearms'),]
+    
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=200, unique=True)
     description = models.TextField(blank=True)
@@ -57,7 +58,7 @@ class WorkoutTemplate(models.Model):
     
 class TemplateExercise(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    template = models.ForeignKey(WorkoutTemplate, on_delete=models.CASCADE, related_name='exercices')
+    template = models.ForeignKey(WorkoutTemplate, on_delete=models.CASCADE, related_name='exercises')
     exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE)   
     order = models.IntegerField() 
     target_sets = models.IntegerField(default=3)
@@ -70,4 +71,41 @@ class TemplateExercise(models.Model):
     class Meta:
         ordering = ['order']
         unique_together = [('template', 'order')]
+
+class WorkoutSession(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='workouts')
+    template = models.ForeignKey(WorkoutTemplate,null=True, blank=True, on_delete=models.SET_NULL)
+    title = models.CharField(max_length=200)
+    date = models.DateField()
+    start_time = models.DateTimeField(null=True, blank=True)
+    end_time = models.DateTimeField(null=True, blank=True)
+    duration_minutes = models.IntegerField(null=True, blank=True)
+    notes = models.TextField(blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    synced_at = models.DateTimeField(null=True, blank=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['-date', '-start_time']
+    
+class Set(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    workout_session = models.ForeignKey(WorkoutSession, on_delete=models.CASCADE, related_name='sets')
+    exercise = models.ForeignKey(Exercise, on_delete=models.PROTECT)
+    set_number = models.IntegerField()
+    weight_kg = models.DecimalField(max_digits=6, decimal_places=2)
+    reps = models.IntegerField()
+    rpe = models.IntegerField(null=True, blank=True)
+    duration_seconds = models.IntegerField(null=True, blank=True)
+    rest_seconds = models.IntegerField(null=True, blank=True)
+    notes = models.TextField(blank=True)
+    is_warmup = models.BooleanField(default=False)
+    is_failure = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    synced_at = models.DateTimeField(null=True, blank=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        ordering = ['set_number']
     
