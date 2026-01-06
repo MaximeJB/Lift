@@ -45,12 +45,13 @@ class WorkoutTemplate(models.Model):
     ('SPLIT', 'Split'),]
     
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    user = models.ForeignKey(CustomUser, null=True, blank=True, on_delete=models.CASCADE)
     name = models.CharField(max_length=200, unique=True)
     description = models.TextField(blank=True)
     category = models.CharField(choices=TRAINING_TYPE_CHOICES, max_length=20)
     #ce qui serait intéressant ici et différent d'applications sois un nombre de template elevé et la possibilité 
     #de les prendres d'un modele, exemple "Jeffnippard Template", avec le truc qui se remplit tout seul
-    #bon c'est juste prendre un template deja crée mais a pousser
+    #bon c'est juste prendre un template deja crée mais a pousse
     estimated_duration = models.IntegerField(default=60)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
