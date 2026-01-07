@@ -23,10 +23,10 @@ from rest_framework_simplejwt.views import (
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include('liftapp.urls')),
     path('accounts/', include('allauth.urls')),
     path('api/auth/', include('accounts.urls')),
     path('api/bjj/', include('bjjapp.urls')),
     path('api/nutrition/', include('nutrition.urls')),
+    path('api/lift/', include('liftapp.urls')),
 ]
 

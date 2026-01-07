@@ -1,7 +1,11 @@
 from liftapp import views
-from django.urls import path
+from rest_framework import routers
 
-urlpatterns = [
-    path('', views.hello_world, name='Hello world')
+router = routers.SimpleRouter()
+router.register('exercise', views.ExerciseViewset, basename='exercise')
+router.register('workout_template', views.WorkoutTemplateViewset, basename='workout_template')
+router.register('template_exercise', views.TemplateExerciseViewset, basename='template_exercise')
+router.register('workout_session', views.WorkoutSessionViewSet, basename='workout_session')
+router.register('set', views.SetViewSet, basename='set')
 
-]
+urlpatterns = router.urls

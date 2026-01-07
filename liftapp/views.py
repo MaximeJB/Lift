@@ -1,11 +1,10 @@
 from rest_framework.decorators import api_view
 from django.db.models import Q
 from rest_framework.response import Response
-from liftapp.models import Exercise, TemplateExercise
-from liftapp.serializers import ExerciseSerializer, ExerciseTemplateSerializer, WorkoutTemplateSerializer
+from liftapp.models import Exercise, TemplateExercise, WorkoutSession, WorkoutTemplate, Set
+from liftapp.serializers import ExerciseSerializer, ExerciseTemplateSerializer, SetSerializer, WorkoutSessionSerializer, WorkoutTemplateSerializer
 from rest_framework import viewsets
-from accounts.permissions import IsAuthenticatedOrReadOnly
-from nutrition.serializers import WeightSerializer
+from accounts.permissions import IsAuthenticatedOrReadOnly, IsOwner
 
 @api_view()
 def hello_world(request):
@@ -25,7 +24,10 @@ class WorkoutTemplateViewset(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticatedOrReadOnly]
     
     def get_queryset(self):
-        return Exercise.objects.all()
+        user = self.request.user
+        cond_public = Q(user__isnull=True)
+        cond_private = Q(user=user)
+        return WorkoutTemplate.objects.filter(cond_public | cond_private)
     
 class TemplateExerciseViewset(viewsets.ModelViewSet):
     serializer_class = ExerciseTemplateSerializer
@@ -38,3 +40,22 @@ class TemplateExerciseViewset(viewsets.ModelViewSet):
         cond_private = Q(template__user=user)
         return TemplateExercise.objects.filter(cond_public | cond_private)
     
+class WorkoutSessionViewSet(viewsets.ModelViewSet):
+    serializer_class = WorkoutSessionSerializer
+    permission_classes = [IsOwner]
+    
+    def get_queryset(self):
+        user = self.request.user
+        return user.workouts.all().order_by('-date', '-start_time')
+    
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+        
+    
+class SetViewSet(viewsets.ModelViewSet):
+    serializer_class = SetSerializer
+    permission_classes = [IsOwner]
+    
+    def get_queryset(self):
+        user = self.request.user
+        return Set.objects.filter(workout_session__user=user)
