@@ -4,7 +4,8 @@ from rest_framework.response import Response
 from liftapp.models import Exercise, TemplateExercise, WorkoutSession, WorkoutTemplate, Set
 from liftapp.serializers import ExerciseSerializer, ExerciseTemplateSerializer, SetSerializer, WorkoutSessionSerializer, WorkoutTemplateSerializer
 from rest_framework import viewsets
-from accounts.permissions import IsAuthenticatedOrReadOnly, IsOwner
+from accounts.permissions import IsOwner
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 @api_view()
 def hello_world(request):
