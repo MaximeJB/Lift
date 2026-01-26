@@ -1,3 +1,4 @@
+from django_filters import filters
 from rest_framework.decorators import api_view
 from django.db.models import Q
 from rest_framework.response import Response
@@ -16,6 +17,9 @@ def hello_world(request):
 class ExerciseViewset(viewsets.ReadOnlyModelViewSet):
     serializer_class = ExerciseSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
+    filter_backends = [filters.SearchFilter]
+    filterset_fields = ('name','description', 'muscle_group', 'equipment_needed', 'is_compound')
+    search_fields = ['name', 'description', 'muscle_group', 'equipment_needed',]
     
     def get_queryset(self):
         return Exercise.objects.all()
