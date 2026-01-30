@@ -1,4 +1,4 @@
-from django_filters import filters
+from rest_framework import filters
 from rest_framework.decorators import api_view
 from django.db.models import Q
 from rest_framework.response import Response
