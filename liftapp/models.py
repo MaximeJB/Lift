@@ -2,9 +2,17 @@ from django.db import models
 import uuid
 from accounts.models import CustomUser
 
+TRAINING_TYPE_CHOICES = [
+    ('STRENGTH', 'Strength'),
+    ('HYPERTROPHY', 'Hypertrophy'),
+    ('ENDURANCE', 'Endurance'),
+    ('FULL_BODY', 'Full Body'),
+    ('CROSSFIT', 'Crossfit'),
+    ('FITNESS', 'Fitness'),
+    ('PUSH_PULL_LEGS', 'Push/Pull/Legs'),
+    ('SPLIT', 'Split'),]
 
-class Exercise(models.Model):
-    MUSCLE_GROUP_CHOICES = [
+MUSCLE_GROUP_CHOICES = [
     ('CHEST', 'Chest'),
     ('BACK', 'Back'),
     ('QUADS', 'Quads'),
@@ -21,6 +29,8 @@ class Exercise(models.Model):
     ('CORE', 'Core'),
     ('FULL_BODY', 'Full Body'),
     ('FOREARMS', 'Forearms'),]
+
+class Exercise(models.Model):
     
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=200, unique=True)
@@ -32,18 +42,12 @@ class Exercise(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     synced_at = models.DateTimeField(null=True, blank=True)
+    video_url = models.URLField(blank=True, null=True)
+    external_id = models.CharField(null=True, unique=True, max_length=50)
+    secondary_muscle_groups = models.CharField(choices= MUSCLE_GROUP_CHOICES, max_length=20)
+    exercise_type = models.CharField(choices= TRAINING_TYPE_CHOICES, max_length=20)
     
 class WorkoutTemplate(models.Model):
-    TRAINING_TYPE_CHOICES = [
-    ('STRENGTH', 'Strength'),
-    ('HYPERTROPHY', 'Hypertrophy'),
-    ('ENDURANCE', 'Endurance'),
-    ('FULL_BODY', 'Full Body'),
-    ('CROSSFIT', 'Crossfit'),
-    ('FITNESS', 'Fitness'),
-    ('PUSH_PULL_LEGS', 'Push/Pull/Legs'),
-    ('SPLIT', 'Split'),]
-    
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user = models.ForeignKey(CustomUser, null=True, blank=True, on_delete=models.CASCADE)
     name = models.CharField(max_length=200, unique=True)

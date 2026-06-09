@@ -2,7 +2,7 @@ from django.core.management.base import BaseCommand
 import json
 import time
 from django.conf import settings
-from selenium import webdriver
+from seleniumbase import Driver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -36,7 +36,8 @@ class Command(BaseCommand):
 
         total = len(data['exercise_templates'])
 
-        driver = webdriver.Chrome()
+        driver = Driver(uc=True)
+        input("Connecte-toi puis appuie Entrée...")
         wait = WebDriverWait(driver, 10)
 
         try:
