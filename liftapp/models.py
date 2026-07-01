@@ -12,6 +12,15 @@ TRAINING_TYPE_CHOICES = [
     ('PUSH_PULL_LEGS', 'Push/Pull/Legs'),
     ('SPLIT', 'Split'),]
 
+TRAINING_FORMAT_CHOICES = [
+    ('WEIGHT_REPS', 'Weight & Reps'),
+    ('REPS_ONLY', 'Reps Only'),
+    ('DURATION', 'Duration'),
+    ('DISTANCE_DURATION', 'Distance & Duration'),
+    ('BODYWEIGHT_WEIGHTED', 'Bodyweight lesté'),
+    ('BODYWEIGHT_ASSISTED', 'Bodyweight assisté')
+    ,]
+
 MUSCLE_GROUP_CHOICES = [
     ('CHEST', 'Chest'),
     ('BACK', 'Back'),
@@ -30,6 +39,9 @@ MUSCLE_GROUP_CHOICES = [
     ('FULL_BODY', 'Full Body'),
     ('FOREARMS', 'Forearms'),]
 
+class MuscleGroup(models.Model):
+    name = models.CharField(max_length=200, unique=True, choices=MUSCLE_GROUP_CHOICES)
+
 class Exercise(models.Model):
     
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -44,8 +56,8 @@ class Exercise(models.Model):
     synced_at = models.DateTimeField(null=True, blank=True)
     video_url = models.URLField(blank=True, null=True)
     external_id = models.CharField(null=True, unique=True, max_length=50)
-    secondary_muscle_groups = models.CharField(choices= MUSCLE_GROUP_CHOICES, max_length=20)
-    exercise_type = models.CharField(choices= TRAINING_TYPE_CHOICES, max_length=20)
+    secondary_muscle_groups = models.ManyToManyField(MuscleGroup, blank=True)
+    exercise_type = models.CharField(choices=TRAINING_FORMAT_CHOICES, max_length=20, blank=True)
     
 class WorkoutTemplate(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -93,6 +105,12 @@ class WorkoutSession(models.Model):
 
     class Meta:
         ordering = ['-date', '-start_time']
+    
+class ProgramType(models.Model):
+    name = models.CharField(max_length=50)
+    format = models.CharField(choices=TRAINING_TYPE_CHOICES, max_length=20, blank=True)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='programs')
+    templates = models.ManyToManyField(WorkoutTemplate, blank=True) 
     
 class Set(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
