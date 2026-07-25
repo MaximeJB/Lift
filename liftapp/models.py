@@ -37,7 +37,9 @@ MUSCLE_GROUP_CHOICES = [
     ('REAR_SHOULDERS', 'Rear Shoulders'),
     ('CORE', 'Core'),
     ('FULL_BODY', 'Full Body'),
-    ('FOREARMS', 'Forearms'),]
+    ('FOREARMS', 'Forearms'),
+    ('ADDUCTORS', 'Adductors'),
+    ('ABDUCTORS', 'Abductors')]
 
 class MuscleGroup(models.Model):
     name = models.CharField(max_length=200, unique=True, choices=MUSCLE_GROUP_CHOICES)

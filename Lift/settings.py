@@ -33,8 +33,6 @@ DEBUG = os.environ["DEBUG"]
 ALLOWED_HOSTS = os.environ["ALLOWED_HOSTS"].split(',')
 
 
-# Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
