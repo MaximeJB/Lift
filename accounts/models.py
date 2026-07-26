@@ -1,12 +1,27 @@
 import uuid
 from django.db import models
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, BaseUserManager
 
-
+class CustomUserManager(BaseUserManager):
+    def create_user(self, email, password=None, **extra_fields):
+        email = self.normalize_email(email)
+        user = self.model(email=email, **extra_fields)
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
+    
+    def create_superuser(self, email, password=None):
+        user = self.create_user(email, password=password)
+        user.is_admin= True
+        user.save(using=self._db)
+        return user
+    
 class CustomUser(AbstractUser):
     profile_visibility_choices = [
     ("PUBLIC", "Public"),
     ("PRIVATE", "Private")]
+    
+    objects = CustomUserManager()
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     pseudo = models.CharField(max_length=100, blank=True, null=True,unique=True)

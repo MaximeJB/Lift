@@ -3,13 +3,15 @@ from rest_framework import serializers
 from liftapp.models import Exercise, Set, TemplateExercise, WorkoutSession, WorkoutTemplate
 
 class ExerciseSerializer(serializers.ModelSerializer):
+    secondary_muscle_groups = serializers.StringRelatedField(many=True, read_only=True)
     class Meta:
         model = Exercise
         fields = ['id', 'name','description', 'muscle_group', 'equipment_needed', 'is_compound', 'image_url',
-                  'created_at', 'updated_at','synced_at',]
+                  'created_at', 'updated_at','synced_at','exercise_type', 'video_url', 'secondary_muscle_groups',]
         read_only_fields = ['id', 'name','description', 'muscle_group', 'equipment_needed',
                             'is_compound', 'image_url',
-                            'updated_at', 'created_at', 'synced_at']
+                            'updated_at', 'created_at', 'synced_at', 'video_url', 'secondary_muscle_groups']
+      
 
 class ExerciseTemplateSerializer(serializers.ModelSerializer):
     exercise = ExerciseSerializer(read_only=True)
