@@ -24,7 +24,20 @@ def test_password_is_hashed():
     assert user.password != 'testpass123'
     assert user.check_password('testpass123')
     
+    
 @pytest.mark.django_db
 def test_registration(api_client):
     request = api_client.post('/api/auth/register/', {'email': "new@test.fr", 'password':'testpass123', 'password_confirm':'testpass123'})
     assert request.status_code == 201
+    
+@pytest.mark.django_db
+def test_login(api_client, user):
+    request = api_client.post('/api/auth/login/', {'email': "test@lift.com", 'password':'testpass123'})
+    assert request.status_code == 200
+    assert 'access' in request.data
+    
+@pytest.mark.django_db
+def test_me(auth_client):
+    request = auth_client.get('/api/auth/me/')
+    assert request.data['email'] == 'new@test.com'
+    assert request.status_code == 200
