@@ -14,13 +14,11 @@ def user(db):
 
 @pytest.fixture
 def auth_client(api_client, user):
-    register = api_client.post('/api/auth/register/', {"email": "new@test.com", "password": 
-        "testpass123", "password_confirm": "testpass123"})
+    register = api_client.post('/api/auth/login/', {"email": "test@lift.com", "password": 
+        "testpass123",})
                     
-    tokens = register.data['tokens']
+    tokens = register.data
+    print(register.data)
     api_client.credentials(HTTP_AUTHORIZATION='Bearer ' + tokens['access'])
-    assert register.status_code == 201
+    assert register.status_code == 200
     return api_client
-
-def log_client(api_client, user):
-    api_client

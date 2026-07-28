@@ -22,11 +22,11 @@ class ExerciseTemplateSerializer(serializers.ModelSerializer):
                   'target_reps_max', 'rest_seconds', 'notes','synced_at',]
         
 class WorkoutTemplateSerializer(serializers.ModelSerializer):
-    exercises = ExerciseTemplateSerializer(many=True, read_only= True)
+    exercises = ExerciseTemplateSerializer(many=True, read_only=True)
     class Meta:
         model = WorkoutTemplate
         fields = ['id', 'name', 'description', 'category', 'estimated_duration',
-                  'created_at', 'updated_at','synced_at',]
+                  'created_at', 'updated_at', 'synced_at', 'exercises']
         
 class SetSerializer(serializers.ModelSerializer):
     class Meta:
@@ -42,6 +42,6 @@ class WorkoutSessionSerializer(serializers.ModelSerializer):
         model = WorkoutSession
         fields = ['id', 'template', 'title', 'date', 'start_time', 'end_time',
                   'duration_minutes', 'notes', 'user', 'created_at', 'updated_at'
-                  , 'synced_at',]
+                  , 'synced_at','sets']
         read_only_fields = ['user']
         

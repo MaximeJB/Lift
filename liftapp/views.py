@@ -6,7 +6,7 @@ from liftapp.models import Exercise, TemplateExercise, WorkoutSession, WorkoutTe
 from liftapp.serializers import ExerciseSerializer, ExerciseTemplateSerializer, SetSerializer, WorkoutSessionSerializer, WorkoutTemplateSerializer
 from rest_framework import viewsets
 from accounts.permissions import IsOwner
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
 
 @api_view()
 def hello_world(request):
@@ -27,27 +27,28 @@ class ExerciseViewset(viewsets.ReadOnlyModelViewSet):
 class WorkoutTemplateViewset(viewsets.ModelViewSet):
     serializer_class = WorkoutTemplateSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
-    
+
     def get_queryset(self):
         user = self.request.user
         cond_public = Q(user__isnull=True)
-        cond_private = Q(user=user)
-        return WorkoutTemplate.objects.filter(cond_public | cond_private)
-    
+        if user.is_authenticated:
+            return WorkoutTemplate.objects.filter(cond_public | Q(user=user))
+        return WorkoutTemplate.objects.filter(cond_public)
+
 class TemplateExerciseViewset(viewsets.ModelViewSet):
     serializer_class = ExerciseTemplateSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
-    
+
     def get_queryset(self):
         user = self.request.user
-        
         cond_public = Q(template__user__isnull=True)
-        cond_private = Q(template__user=user)
-        return TemplateExercise.objects.filter(cond_public | cond_private)
+        if user.is_authenticated:
+            return TemplateExercise.objects.filter(cond_public | Q(template__user=user))
+        return TemplateExercise.objects.filter(cond_public)
     
 class WorkoutSessionViewSet(viewsets.ModelViewSet):
     serializer_class = WorkoutSessionSerializer
-    permission_classes = [IsOwner]
+    permission_classes = [IsAuthenticated, IsOwner]
     
     def get_queryset(self):
         user = self.request.user
@@ -59,7 +60,7 @@ class WorkoutSessionViewSet(viewsets.ModelViewSet):
     
 class SetViewSet(viewsets.ModelViewSet):
     serializer_class = SetSerializer
-    permission_classes = [IsOwner]
+    permission_classes = [IsAuthenticated, IsOwner]
     
     def get_queryset(self):
         user = self.request.user

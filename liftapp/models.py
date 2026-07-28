@@ -1,7 +1,7 @@
 from django.db import models
 import uuid
 from accounts.models import CustomUser
-
+from datetime import date
 TRAINING_TYPE_CHOICES = [
     ('STRENGTH', 'Strength'),
     ('HYPERTROPHY', 'Hypertrophy'),
@@ -96,7 +96,7 @@ class WorkoutSession(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='workouts')
     template = models.ForeignKey(WorkoutTemplate,null=True, blank=True, on_delete=models.SET_NULL)
     title = models.CharField(max_length=200)
-    date = models.DateField()
+    date = models.DateField(default=date.today)
     start_time = models.DateTimeField(null=True, blank=True)
     end_time = models.DateTimeField(null=True, blank=True)
     duration_minutes = models.IntegerField(null=True, blank=True)
@@ -131,6 +131,10 @@ class Set(models.Model):
     synced_at = models.DateTimeField(null=True, blank=True)
     updated_at = models.DateTimeField(auto_now=True)
     
+    @property
+    def user(self):
+        return self.workout_session.user
+
     class Meta:
         ordering = ['set_number']
     

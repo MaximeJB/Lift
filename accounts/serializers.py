@@ -5,8 +5,8 @@ from accounts.models import CustomUser
 class PublicUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
-        fields = ['id', 'pseudo','created_at', 'username']
-        read_only_fields = ['id', 'username', 'created_at']
+        fields = ['id', 'pseudo','created_at',]
+        read_only_fields = ['id', 'created_at']
 
 class PrivateUserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -55,15 +55,9 @@ class LoginSerializer(serializers.Serializer):
         email = attrs.get('email')
         password = attrs.get('password')
 
-        # Try to find the user by email first
-        try:
-            user = CustomUser.objects.get(email=email)
-            username = user.username # authenticate needs username, but we login with email
-        except CustomUser.DoesNotExist:
-            raise serializers.ValidationError('Invalid credentials')
-
+        
         # Use Django's authenticate function to check password
-        user = authenticate(username=username, password=password) 
+        user = authenticate(username=email, password=password)
 
         if not user:
             raise serializers.ValidationError('Invalid credentials')
