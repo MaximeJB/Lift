@@ -1,15 +1,15 @@
 ---
 id: "tape-7-tests-api-exercices-2026-07-28"
-status: "done today"
+status: "done"
 priority: "medium"
 assignee: null
 epic: null
 dueDate: null
 created: "2026-07-28T09:04:53.963Z"
-modified: "2026-07-28T13:28:47.703Z"
-completedAt: null
+modified: "2026-07-28T19:11:58.428Z"
+completedAt: "2026-07-28T19:11:58.428Z"
 labels: []
-order: "a3"
+order: "a5"
 ---
 # Étape 7 — Tests API exercices
 

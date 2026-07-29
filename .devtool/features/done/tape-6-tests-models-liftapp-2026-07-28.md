@@ -1,13 +1,13 @@
 ---
 id: "tape-6-tests-models-liftapp-2026-07-28"
-status: "done today"
+status: "done"
 priority: "medium"
 assignee: null
 epic: null
 dueDate: null
 created: "2026-07-28T09:11:32.891Z"
-modified: "2026-07-28T13:28:44.331Z"
-completedAt: null
+modified: "2026-07-28T19:11:50.005Z"
+completedAt: "2026-07-28T19:11:50.005Z"
 labels: []
 order: "a2"
 ---

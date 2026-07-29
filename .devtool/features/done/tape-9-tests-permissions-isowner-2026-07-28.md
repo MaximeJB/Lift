@@ -1,15 +1,15 @@
 ---
 id: "tape-9-tests-permissions-isowner-2026-07-28"
-status: "done today"
+status: "done"
 priority: "medium"
 assignee: null
 epic: null
 dueDate: null
 created: "2026-07-28T09:12:34.195Z"
-modified: "2026-07-28T13:27:54.294Z"
-completedAt: null
+modified: "2026-07-28T19:11:56.701Z"
+completedAt: "2026-07-28T19:11:56.701Z"
 labels: []
-order: "a1"
+order: "a4"
 ---
 # Étape 9 — Tests permissions IsOwner
 

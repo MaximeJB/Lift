@@ -1,15 +1,15 @@
 ---
 id: "tape-8-tests-api-sessions-et-sets-2026-07-28"
-status: "done today"
+status: "done"
 priority: "medium"
 assignee: null
 epic: null
 dueDate: null
 created: "2026-07-28T09:07:11.834Z"
-modified: "2026-07-28T13:27:53.505Z"
-completedAt: null
+modified: "2026-07-28T19:11:54.218Z"
+completedAt: "2026-07-28T19:11:54.218Z"
 labels: []
-order: "a0"
+order: "a3"
 ---
 # Étape 8 — Tests API sessions et sets
 
