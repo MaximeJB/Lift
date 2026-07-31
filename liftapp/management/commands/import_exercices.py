@@ -5,7 +5,7 @@ from django.db import transaction
 from liftapp.models import Exercise
 
 # On place les constantes en haut pour une maintenance facile
-JSON_FILENAME = "exercises.json"
+JSON_FILENAME = "data/exercises.json"
 
 MUSCLE_MAPPING = {
     "abdominals": "CORE",

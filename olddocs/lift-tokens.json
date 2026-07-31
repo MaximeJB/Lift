@@ -1,0 +1,55 @@
+{
+  "$description": "LIFT V1 — design tokens (mode paper). Format DTCG. Source de verite : lift-design-tokens-v1.md. Elevation = aucune (zero ombre) par design. Mode terminal (sombre) et voix serif/mono differes hors V1.",
+  "color": {
+    "ground":        { "$type": "color", "$value": "#ECE5D7", "$description": "Fond paper chaud — jamais de blanc pur" },
+    "surface":       { "$type": "color", "$value": "#F3EDE1", "$description": "Fond de champ" },
+    "ink":           { "$type": "color", "$value": "#211C16", "$description": "Texte principal (near-black chaud)" },
+    "ink-muted":     { "$type": "color", "$value": "#57503F", "$description": "Labels, texte secondaire" },
+    "ink-faint":     { "$type": "color", "$value": "#8B8474", "$description": "Placeholder, metadonnees" },
+    "hairline":      { "$type": "color", "$value": "#C6BDA9", "$description": "Bordures de champ, filets" },
+    "hairline-soft": { "$type": "color", "$value": "#CFC7B4", "$description": "Filets decoratifs" },
+    "accent":        { "$type": "color", "$value": "#D6552B", "$description": "Accent unique — action primaire" },
+    "on-accent":     { "$type": "color", "$value": "#FBF6EC", "$description": "Texte sur l'accent" },
+    "alert":         { "$type": "color", "$value": "#9A2A20", "$description": "Texte d'alerte / erreur" },
+    "alert-bg":      { "$type": "color", "$value": "#EAD7CF", "$description": "Fond de banniere d'erreur" },
+    "alert-border":  { "$type": "color", "$value": "#C98B7E", "$description": "Bordure de banniere d'erreur" }
+  },
+  "font": {
+    "family": { "$type": "fontFamily", "$value": "Inter", "$description": "Grotesque unique — V1 (serif/mono differes)" }
+  },
+  "type": {
+    "wordmark": { "$type": "typography", "$value": { "fontFamily": "{font.family}", "fontSize": "26px", "fontWeight": 700, "letterSpacing": "5px" }, "$description": "« LIFT » — moment display" },
+    "input":    { "$type": "typography", "$value": { "fontFamily": "{font.family}", "fontSize": "16px", "fontWeight": 400, "letterSpacing": "0px" }, "$description": "Saisie (16 = anti-zoom iOS)" },
+    "button":   { "$type": "typography", "$value": { "fontFamily": "{font.family}", "fontSize": "14px", "fontWeight": 600, "letterSpacing": "2px", "textCase": "uppercase" }, "$description": "Libelle de bouton (voix machine)" },
+    "label":    { "$type": "typography", "$value": { "fontFamily": "{font.family}", "fontSize": "11px", "fontWeight": 400, "letterSpacing": "1.5px", "textCase": "uppercase" }, "$description": "Labels de champ (voix machine)" },
+    "link":     { "$type": "typography", "$value": { "fontFamily": "{font.family}", "fontSize": "13px", "fontWeight": 400, "letterSpacing": "0px" }, "$description": "Liens (voix lecture, casse normale)" },
+    "body":     { "$type": "typography", "$value": { "fontFamily": "{font.family}", "fontSize": "14px", "fontWeight": 400, "letterSpacing": "0px" }, "$description": "Texte courant" },
+    "min":      { "$type": "dimension", "$value": "13px", "$description": "Taille fonctionnelle plancher (accessibilite)" }
+  },
+  "space": {
+    "1": { "$type": "dimension", "$value": "4px" },
+    "2": { "$type": "dimension", "$value": "8px" },
+    "3": { "$type": "dimension", "$value": "16px" },
+    "4": { "$type": "dimension", "$value": "24px" },
+    "5": { "$type": "dimension", "$value": "32px" },
+    "6": { "$type": "dimension", "$value": "48px" }
+  },
+  "radius": {
+    "field":  { "$type": "dimension", "$value": "4px", "$description": "Champs, bouton (coins nets)" },
+    "device": { "$type": "dimension", "$value": "26px", "$description": "Cadre d'appareil (preview seulement)" }
+  },
+  "border": {
+    "width": { "$type": "dimension", "$value": "1px", "$description": "Epaisseur des filets" }
+  },
+  "layout": {
+    "form-max-width": { "$type": "dimension", "$value": "420px", "$description": "Largeur max du formulaire (paysage/tablette)" }
+  },
+  "target": {
+    "min": { "$type": "dimension", "$value": "44px", "$description": "Cible tactile minimale (WCAG 2.2 / iOS HIG)" }
+  },
+  "field": {
+    "bg":           { "$type": "color", "$value": "{color.surface}",  "$description": "Fond de champ — etat Default" },
+    "border":       { "$type": "color", "$value": "{color.hairline}", "$description": "Bordure de champ — etat Default" },
+    "border-error": { "$type": "color", "$value": "{color.alert}",    "$description": "Bordure de champ — etat Error" }
+  }
+}

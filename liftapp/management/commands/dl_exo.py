@@ -17,7 +17,7 @@ from selenium.common.exceptions import TimeoutException
 class Command(BaseCommand):
     def handle(self, *args, **options):
         BASE_URL = "https://hevy.com"
-        JSON_FILENAME = 'hevy.json'
+        JSON_FILENAME = 'data/hevy.json'
         CHECKPOINT_INTERVAL = 50
         video_dict = {}
 
@@ -62,7 +62,7 @@ class Command(BaseCommand):
                     time.sleep(1)
 
                     if index % CHECKPOINT_INTERVAL == 0 and index > 0:
-                        with open('data_vids.json', 'w') as f:
+                        with open('data/data_vids.json', 'w') as f:
                             json.dump(video_dict, f)
 
                 except TimeoutException:
@@ -71,5 +71,5 @@ class Command(BaseCommand):
         finally:
             driver.quit()
             print(f"Terminé. {len(video_dict)} vidéos récupérées.")
-            with open('data_vids.json', 'w') as f:
+            with open('data/data_vids.json', 'w') as f:
                 json.dump(video_dict, f)

@@ -6,8 +6,8 @@ from liftapp.models import Exercise, MuscleGroup
 import json
 import difflib
 
-HEVY_FILENAME = 'hevy.json'
-DATAVID_FILENAME= 'data_vids.json'
+HEVY_FILENAME = 'data/hevy.json'
+DATAVID_FILENAME = 'data/data_vids.json'
 
 MUSCLE_MAPPING = {
     "abdominals": "CORE",

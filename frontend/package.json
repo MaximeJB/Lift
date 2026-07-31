@@ -1,0 +1,50 @@
+{
+  "name": "frontend",
+  "version": "1.0.0",
+  "main": "expo-router/entry",
+  "scripts": {
+    "tokens:build": "style-dictionary build --config style-dictionary.config.mjs",
+    "storybook:index": "sb-rn-get-stories",
+    "storybook:native": "cross-env EXPO_PUBLIC_STORYBOOK_ENABLED=true expo start -c",
+    "storybook:web": "storybook dev -p 6006 -c .storybook",
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios"
+  },
+  "dependencies": {
+    "@expo-google-fonts/inter": "^0.4.2",
+    "@gorhom/bottom-sheet": "^5.2.14",
+    "babel-preset-expo": "~54.0.10",
+    "expo": "~54.0.35",
+    "expo-constants": "~18.0.13",
+    "expo-font": "~14.0.12",
+    "expo-linking": "~8.0.12",
+    "expo-router": "~6.0.24",
+    "expo-splash-screen": "~31.0.13",
+    "expo-status-bar": "~3.0.9",
+    "nativewind": "4.2.6",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "react-native": "0.81.5",
+    "react-native-gesture-handler": "~2.28.0",
+    "react-native-reanimated": "~4.1.1",
+    "react-native-safe-area-context": "~5.6.0",
+    "react-native-screens": "~4.16.0",
+    "react-native-web": "^0.21.0",
+    "react-native-worklets": "0.5.1"
+  },
+  "devDependencies": {
+    "@storybook/react-native": "10.4.6",
+    "@storybook/react-native-web-vite": "10.4.6",
+    "@types/react": "~19.1.0",
+    "autoprefixer": "10.5.4",
+    "cross-env": "10.1.0",
+    "prettier-plugin-tailwindcss": "0.8.1",
+    "storybook": "10.4.6",
+    "style-dictionary": "^5.5.0",
+    "tailwindcss": "3.4.19",
+    "typescript": "~5.9.2",
+    "vite": "8.2.0"
+  },
+  "private": true
+}

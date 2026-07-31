@@ -6,10 +6,10 @@ assignee: null
 epic: null
 dueDate: null
 created: "2026-07-28T14:31:27.471Z"
-modified: "2026-07-28T14:35:04.397Z"
+modified: "2026-07-31T08:13:23.320Z"
 completedAt: null
 labels: []
-order: "a5G"
+order: "a3zx"
 ---
 # 10. Créer la navigation par tabs (Home, Lift, Profile)
 
