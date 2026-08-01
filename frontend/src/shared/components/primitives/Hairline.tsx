@@ -26,7 +26,9 @@ export function Hairline({ orientation = 'horizontal', className = '' }: Hairlin
           ? `w-full bg-divider ${className}`
           : `h-full bg-divider ${className}`
       }
-      // eslint-disable-next-line react-native/no-inline-styles -- cf. en-tête : hairlineWidth n'est connu qu'à l'exécution
+      // Seul `style` du projet — cf. en-tête. `react-native/no-inline-styles` ne le
+      // signale pas : il ne flagge que les valeurs littérales, et hairlineWidth n'en
+      // est pas une. L'exception reste documentée ici plutôt que par une dérogation.
       style={
         orientation === 'horizontal'
           ? { height: StyleSheet.hairlineWidth }

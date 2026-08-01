@@ -1,15 +1,15 @@
 ---
 id: "2-structurer-les-dossiers-feature-based-2026-07-28"
-status: "done today"
+status: "done"
 priority: "medium"
 assignee: null
 epic: null
 dueDate: null
 created: "2026-07-28T13:40:53.355Z"
-modified: "2026-07-31T12:45:26.635Z"
-completedAt: null
+modified: "2026-08-01T09:42:53.826Z"
+completedAt: "2026-08-01T09:42:53.826Z"
 labels: []
-order: "a5"
+order: "aD"
 ---
 # 2. Structurer les dossiers (feature-based)
 

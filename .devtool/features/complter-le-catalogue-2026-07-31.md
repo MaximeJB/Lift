@@ -1,15 +1,15 @@
 ---
 id: "complter-le-catalogue-2026-07-31"
-status: "todo"
+status: "done today"
 priority: "medium"
 assignee: null
 epic: null
 dueDate: null
 created: "2026-07-31T08:12:26.593Z"
-modified: "2026-07-31T08:12:36.982Z"
+modified: "2026-08-01T16:09:50.585Z"
 completedAt: null
 labels: []
-order: "a3zl"
+order: "a2"
 ---
 # Compléter le catalogue
 

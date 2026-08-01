@@ -2,26 +2,97 @@
   "color": {
     "$description": "LIFT V1 — couche semantique. Chaque nom decrit une FONCTION dans l'interface, jamais une apparence. Chaque role est justifie par un ecran de LIFT_Specification_Interface_V1.md — voir MAPPING.md. Convention : categorie.role-variante, kebab-case.",
 
-    "surface-page":     { "$type": "color", "$value": "{paper.base}",   "$description": "Fond de page — les 13 ecrans" },
-    "field-background": { "$type": "color", "$value": "{paper.raised}", "$description": "Fond de champ, etat Default — A2/A3/A4/A5, SearchInput C1, SetInputForm C5, NotesInput C6, D1" },
+    "surface-page": {
+      "$type": "color",
+      "$value": "{paper.base}",
+      "$description": "Fond de page — les 13 ecrans"
+    },
+    "field-background": {
+      "$type": "color",
+      "$value": "{paper.raised}",
+      "$description": "Fond de champ, etat Default — A2/A3/A4/A5, SearchInput C1, SetInputForm C5, NotesInput C6, D1"
+    },
 
-    "text-default":     { "$type": "color", "$value": "{ink.strong}", "$description": "Texte principal — les 13 ecrans" },
-    "text-support":     { "$type": "color", "$value": "{ink.mid}",    "$description": "Labels A2/A3, groupe musculaire C1, date et duree C7" },
-    "text-placeholder": { "$type": "color", "$value": "{ink.weak}",   "$description": "Placeholders A2/A3, metadonnees B1 (date PR) et C7" },
-    "text-on-action":   { "$type": "color", "$value": "{paper.bright}", "$description": "Libelle sur fond d'action — PrimaryButton A2/A3/A4/A5/C6, PrimaryCTAButton B1, StickyCTAButton C4" },
+    "text-default": {
+      "$type": "color",
+      "$value": "{ink.strong}",
+      "$description": "Texte principal — les 13 ecrans"
+    },
+    "text-support": {
+      "$type": "color",
+      "$value": "{ink.mid}",
+      "$description": "Labels A2/A3, groupe musculaire C1, date et duree C7"
+    },
+    "text-placeholder": {
+      "$type": "color",
+      "$value": "{ink.weak}",
+      "$description": "Placeholders A2/A3, metadonnees B1 (date PR) et C7"
+    },
+    "text-on-action": {
+      "$type": "color",
+      "$value": "{ink.strong}",
+      "$description": "Libelle sur fond d'action — PrimaryButton A2/A3/A4/A5/C6, PrimaryCTAButton B1, StickyCTAButton C4. Encre sombre : un aplat accent assez clair pour porter du texte sombre ne peut pas tenir 3:1 contre la page, d'ou le contour action-border."
+    },
 
-    "divider":            { "$type": "color", "$value": "{rule.strong}", "$description": "ListDivider C1 et C7, separateurs SegmentedControl C3/C7/C1" },
-    "field-border":       { "$type": "color", "$value": "{rule.strong}", "$description": "Bordure de champ, etat Default — A2/A3/A4/A5, C1, C5, C6, D1" },
-    "field-border-error": { "$type": "color", "$value": "{oxide.base}",  "$description": "Bordure de champ, etat Error — A2/A3, D1" },
+    "divider": {
+      "$type": "color",
+      "$value": "{rule.strong}",
+      "$description": "Filet DECORATIF — ListDivider C1 et C7, separateurs SegmentedControl C3/C7/C1. Exempte de WCAG 1.4.11 : ne porte aucune information."
+    },
+    "control-border": {
+      "$type": "color",
+      "$value": "{rule.contrast}",
+      "$description": "Contour de composant INTERACTIF — champs A2/A3/A4/A5, C1, C5, C6, D1 et Button secondary. Doit tenir 3:1 (WCAG 1.4.11) : c'est ce qui rend le composant identifiable."
+    },
+    "control-border-focus": {
+      "$type": "color",
+      "$value": "{rust.deep}",
+      "$description": "Contour de champ, etat FOCUS — EmailInput et PasswordInput A2, SearchInput C1, EditableTitleInput C6. Le champ actif est le seul point accentue de l'ecran."
+    },
+    "field-border-error": {
+      "$type": "color",
+      "$value": "{oxide.base}",
+      "$description": "Bordure de champ, etat Error — A2/A3, D1"
+    },
 
-    "action": { "$type": "color", "$value": "{rust.base}", "$description": "Accent unique. PrimaryButton A2/A3/A4/A5/C6, PrimaryCTAButton B1, StickyCTAButton C4, tab actif, segment actif C3/C7/C1, PRHighlightBanner C6" },
+    "action-border": {
+      "$type": "color",
+      "$value": "{ink.strong}",
+      "$description": "Contour du bouton primaire. Sans lui l'aplat accent ne tient que 2.84:1 contre la page : c'est ce filet qui rend le bouton identifiable (WCAG 1.4.11)."
+    },
 
-    "feedback-error":         { "$type": "color", "$value": "{oxide.base}", "$description": "Erreur inline A2/A3/D1, DestructiveTextButton C6/C8/D1" },
-    "feedback-error-surface": { "$type": "color", "$value": "{oxide.tint}", "$description": "Fond ErrorBanner — A2/A3/A4, B1, C1, C3, C7" },
-    "feedback-error-border":  { "$type": "color", "$value": "{oxide.edge}", "$description": "Bordure ErrorBanner — memes ecrans" },
+    "action": {
+      "$type": "color",
+      "$value": "{rust.base}",
+      "$description": "Accent unique. PrimaryButton A2/A3/A4/A5/C6, PrimaryCTAButton B1, StickyCTAButton C4, tab actif, segment actif C3/C7/C1, PRHighlightBanner C6"
+    },
 
-    "diagram-muscle-primary":   { "$type": "color", "$value": "{rust.base}", "$description": "Muscle principal surligne — BodyDiagram C2" },
-    "diagram-muscle-secondary": { "$type": "color", "$value": "{ink.mid}",   "$description": "Muscles secondaires surlignes — BodyDiagram C2. Distinction tonale, pas chromatique : contrainte systeme d'un seul accent sature par vue." }
+    "feedback-error": {
+      "$type": "color",
+      "$value": "{oxide.base}",
+      "$description": "Erreur inline A2/A3/D1, DestructiveTextButton C6/C8/D1"
+    },
+    "feedback-error-surface": {
+      "$type": "color",
+      "$value": "{oxide.tint}",
+      "$description": "Fond ErrorBanner — A2/A3/A4, B1, C1, C3, C7"
+    },
+    "feedback-error-border": {
+      "$type": "color",
+      "$value": "{oxide.edge}",
+      "$description": "Bordure ErrorBanner — memes ecrans"
+    },
+
+    "diagram-muscle-primary": {
+      "$type": "color",
+      "$value": "{rust.base}",
+      "$description": "Muscle principal surligne — BodyDiagram C2"
+    },
+    "diagram-muscle-secondary": {
+      "$type": "color",
+      "$value": "{ink.mid}",
+      "$description": "Muscles secondaires surlignes — BodyDiagram C2. Distinction tonale, pas chromatique : contrainte systeme d'un seul accent sature par vue."
+    }
   },
 
   "type": {
@@ -29,43 +100,143 @@
 
     "wordmark": {
       "$type": "typography",
-      "$value": { "fontFamily": "{font.grotesque}", "fontSize": "26px", "fontWeight": 700, "letterSpacing": "5px", "lineHeight": "{line-height.tight}" },
+      "$value": {
+        "fontFamily": "{font.grotesque}",
+        "fontSize": "26px",
+        "fontWeight": 700,
+        "letterSpacing": "5px",
+        "lineHeight": "{line-height.tight}"
+      },
       "$description": "SplashLogo A1, header logo A2 et A3"
     },
     "input": {
       "$type": "typography",
-      "$value": { "fontFamily": "{font.grotesque}", "fontSize": "16px", "fontWeight": 400, "letterSpacing": "0px", "lineHeight": "{line-height.relaxed}" },
+      "$value": {
+        "fontFamily": "{font.grotesque}",
+        "fontSize": "16px",
+        "fontWeight": 400,
+        "letterSpacing": "0px",
+        "lineHeight": "{line-height.relaxed}"
+      },
       "$description": "Tous les TextInput — 16px impose par l'anti-zoom iOS. A2/A3/A4/A5, SearchInput C1, SetInputForm C5, EditableTitleInput et NotesInput C6, D1"
     },
     "button": {
       "$type": "typography",
-      "$value": { "fontFamily": "{font.grotesque}", "fontSize": "14px", "fontWeight": 600, "letterSpacing": "2px", "textCase": "uppercase", "lineHeight": "{line-height.tight}" },
+      "$value": {
+        "fontFamily": "{font.grotesque}",
+        "fontSize": "14px",
+        "fontWeight": 600,
+        "letterSpacing": "2px",
+        "textCase": "uppercase",
+        "lineHeight": "{line-height.tight}"
+      },
       "$description": "Tous les libelles de bouton — voix machine"
     },
     "label": {
       "$type": "typography",
-      "$value": { "fontFamily": "{font.grotesque}", "fontSize": "11px", "fontWeight": 400, "letterSpacing": "1.5px", "textCase": "uppercase", "lineHeight": "{line-height.tight}" },
-      "$description": "Labels de champ A2/A3/D1, label StatCard B1. ATTENTION : 11px passe sous size.text-min (13px) — voir MAPPING.md, section Constats."
+      "$value": {
+        "fontFamily": "{font.grotesque}",
+        "fontSize": "13px",
+        "fontWeight": 400,
+        "letterSpacing": "1.5px",
+        "textCase": "uppercase",
+        "lineHeight": "{line-height.tight}"
+      },
+      "$description": "Labels de champ A2/A3/D1, label StatCard B1 — voix machine. Passe de 11px a 13px le 01/08/2026 pour respecter measure.text-min (atelier visuel)."
     },
     "link": {
       "$type": "typography",
-      "$value": { "fontFamily": "{font.grotesque}", "fontSize": "13px", "fontWeight": 400, "letterSpacing": "0px", "lineHeight": "{line-height.tight}" },
+      "$value": {
+        "fontFamily": "{font.grotesque}",
+        "fontSize": "13px",
+        "fontWeight": 400,
+        "letterSpacing": "0px",
+        "lineHeight": "{line-height.tight}"
+      },
       "$description": "TextLink A2 et A3, QuickLink B1 — voix lecture, casse normale"
     },
     "body": {
       "$type": "typography",
-      "$value": { "fontFamily": "{font.grotesque}", "fontSize": "14px", "fontWeight": 400, "letterSpacing": "0px", "lineHeight": "{line-height.relaxed}" },
+      "$value": {
+        "fontFamily": "{font.grotesque}",
+        "fontSize": "14px",
+        "fontWeight": 400,
+        "letterSpacing": "0px",
+        "lineHeight": "{line-height.relaxed}"
+      },
       "$description": "DescriptionText C2, description template C4, noms de liste C1/C3/C7, annexe CGU"
+    },
+
+    "mono-display": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.mono-display}",
+        "fontSize": "26px",
+        "fontWeight": 600,
+        "letterSpacing": "0px",
+        "lineHeight": "{line-height.tight}"
+      },
+      "$description": "Chiffre mis en avant — StatCard volume B1, 1RM estime B1, chrono C5, StatSummaryBlock C6. Grand corps : la largeur de Martian Mono y est un atout."
+    },
+    "mono-dense": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.mono-dense}",
+        "fontSize": "14px",
+        "fontWeight": 400,
+        "letterSpacing": "0px",
+        "lineHeight": "{line-height.tight}"
+      },
+      "$description": "Donnees tabulaires serrees — SetRow C5 et C8 (poids x reps, RPE). Colonnes alignees sur plusieurs lignes."
+    },
+    "mono-meta": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.mono-meta}",
+        "fontSize": "13px",
+        "fontWeight": 400,
+        "letterSpacing": "0px",
+        "lineHeight": "{line-height.tight}"
+      },
+      "$description": "Metadonnees discretes — dates et durees C7, date des PR B1, duree estimee C4."
+    },
+    "mono-accent": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.mono-accent}",
+        "fontSize": "13px",
+        "fontWeight": 400,
+        "letterSpacing": "1.5px",
+        "textCase": "uppercase",
+        "lineHeight": "{line-height.tight}"
+      },
+      "$description": "Etiquette ponctuelle — MonthSectionHeader C7, en-tetes de section. JAMAIS en colonne ni en paragraphe : Cutive Mono imite une frappe usee."
     }
   },
 
   "radius": {
-    "control": { "$type": "dimension", "$value": "{corner.none}", "$description": "Champs et boutons — A2/A3/A4/A5, B1, C4, C6, D1. Angle vif : contrainte systeme §08 « predominantly sharp, square-cornered »." }
+    "control": {
+      "$type": "dimension",
+      "$value": "{corner.none}",
+      "$description": "Champs et boutons — A2/A3/A4/A5, B1, C4, C6, D1. Angle vif : contrainte systeme §08 « predominantly sharp, square-cornered »."
+    }
   },
 
   "size": {
-    "touch-target":   { "$type": "dimension", "$value": "{measure.touch}",    "$description": "Cible tactile minimale — A2 §11, C4 §11, C5 §12" },
-    "form-max-width": { "$type": "dimension", "$value": "{measure.form}",     "$description": "Largeur max de formulaire en paysage et tablette — A2 §12, A3, A4, A5" },
-    "border":         { "$type": "dimension", "$value": "{measure.hairline}", "$description": "Epaisseur de filet et de bordure de champ — tous ecrans" }
+    "touch-target": {
+      "$type": "dimension",
+      "$value": "{measure.touch}",
+      "$description": "Cible tactile minimale — A2 §11, C4 §11, C5 §12"
+    },
+    "form-max-width": {
+      "$type": "dimension",
+      "$value": "{measure.form}",
+      "$description": "Largeur max de formulaire en paysage et tablette — A2 §12, A3, A4, A5"
+    },
+    "border": {
+      "$type": "dimension",
+      "$value": "{measure.hairline}",
+      "$description": "Epaisseur de filet et de bordure de champ — tous ecrans"
+    }
   }
 }

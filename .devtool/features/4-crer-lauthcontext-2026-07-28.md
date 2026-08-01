@@ -1,15 +1,15 @@
 ---
 id: "4-crer-lauthcontext-2026-07-28"
-status: "todo"
+status: "done today"
 priority: "medium"
 assignee: null
 epic: null
 dueDate: null
 created: "2026-07-28T13:42:08.606Z"
-modified: "2026-07-28T14:32:18.707Z"
+modified: "2026-08-01T16:10:03.013Z"
 completedAt: null
 labels: []
-order: "a3t"
+order: "a4"
 ---
 # 3. Créer l'AuthContext
 

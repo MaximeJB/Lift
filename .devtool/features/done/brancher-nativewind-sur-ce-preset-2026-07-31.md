@@ -1,15 +1,15 @@
 ---
 id: "brancher-nativewind-sur-ce-preset-2026-07-31"
-status: "done today"
+status: "done"
 priority: "medium"
 assignee: null
 epic: null
 dueDate: null
 created: "2026-07-31T08:10:19.392Z"
-modified: "2026-07-31T12:34:57.731Z"
-completedAt: null
+modified: "2026-08-01T09:42:53.746Z"
+completedAt: "2026-08-01T09:42:53.746Z"
 labels: []
-order: "a4"
+order: "aB"
 ---
 # Brancher NativeWind sur ce preset
 

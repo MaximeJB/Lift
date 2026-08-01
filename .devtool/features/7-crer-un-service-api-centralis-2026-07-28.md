@@ -1,15 +1,15 @@
 ---
 id: "7-crer-un-service-api-centralis-2026-07-28"
-status: "todo"
+status: "done today"
 priority: "medium"
 assignee: null
 epic: null
 dueDate: null
 created: "2026-07-28T13:43:23.882Z"
-modified: "2026-07-28T14:34:44.619Z"
+modified: "2026-08-01T16:10:04.116Z"
 completedAt: null
 labels: []
-order: "a3h"
+order: "a5"
 ---
 # 4. Créer un service API centralisé
 

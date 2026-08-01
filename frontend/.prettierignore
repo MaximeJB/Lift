@@ -1,0 +1,4 @@
+src/shared/theme/
+.rnstorybook/storybook.requires.ts
+.sb-check/
+node_modules/

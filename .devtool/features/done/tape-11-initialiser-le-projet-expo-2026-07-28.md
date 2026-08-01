@@ -1,15 +1,15 @@
 ---
 id: "tape-11-initialiser-le-projet-expo-2026-07-28"
-status: "done today"
+status: "done"
 priority: "medium"
 assignee: null
 epic: null
 dueDate: null
 created: "2026-07-28T09:13:09.135Z"
-modified: "2026-07-31T08:07:57.948Z"
-completedAt: null
+modified: "2026-08-01T09:42:53.538Z"
+completedAt: "2026-08-01T09:42:53.538Z"
 labels: []
-order: "a0"
+order: "a7"
 ---
 # 1.Initialiser le projet Expo
 

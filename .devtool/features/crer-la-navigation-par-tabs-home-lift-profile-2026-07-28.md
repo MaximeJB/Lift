@@ -1,15 +1,15 @@
 ---
 id: "crer-la-navigation-par-tabs-home-lift-profile-2026-07-28"
-status: "todo"
+status: "done today"
 priority: "medium"
 assignee: null
 epic: null
 dueDate: null
 created: "2026-07-28T14:31:27.471Z"
-modified: "2026-07-31T08:13:23.320Z"
+modified: "2026-08-01T16:10:02.243Z"
 completedAt: null
 labels: []
-order: "a3zx"
+order: "a3"
 ---
 # 10. Créer la navigation par tabs (Home, Lift, Profile)
 

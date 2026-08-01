@@ -1,15 +1,15 @@
 ---
 id: "installer-storybook-2026-07-31"
-status: "done today"
+status: "done"
 priority: "medium"
 assignee: null
 epic: null
 dueDate: null
 created: "2026-07-31T08:10:59.709Z"
-modified: "2026-07-31T13:15:06.450Z"
-completedAt: null
+modified: "2026-08-01T09:42:53.866Z"
+completedAt: "2026-08-01T09:42:53.866Z"
 labels: []
-order: "a6"
+order: "aE"
 ---
 # Installer Storybook
 

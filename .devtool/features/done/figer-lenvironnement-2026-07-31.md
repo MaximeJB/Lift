@@ -1,15 +1,15 @@
 ---
 id: "figer-lenvironnement-2026-07-31"
-status: "done today"
+status: "done"
 priority: "medium"
 assignee: null
 epic: null
 dueDate: null
 created: "2026-07-31T08:08:33.068Z"
-modified: "2026-07-31T09:30:22.446Z"
-completedAt: null
+modified: "2026-08-01T09:42:53.581Z"
+completedAt: "2026-08-01T09:42:53.581Z"
 labels: []
-order: "a1"
+order: "a8"
 ---
 # Figer l'environnement
 

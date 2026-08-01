@@ -1,15 +1,15 @@
 ---
 id: "compiler-les-tokens-vers-un-preset-tailwind-2026-07-31"
-status: "done today"
+status: "done"
 priority: "medium"
 assignee: null
 epic: null
 dueDate: null
 created: "2026-07-31T08:09:42.672Z"
-modified: "2026-07-31T12:34:54.983Z"
-completedAt: null
+modified: "2026-08-01T09:42:53.708Z"
+completedAt: "2026-08-01T09:42:53.708Z"
 labels: []
-order: "a3"
+order: "aA"
 ---
 # Compiler les tokens vers un preset Tailwind
 

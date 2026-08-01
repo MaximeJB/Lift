@@ -1,15 +1,15 @@
 ---
 id: "structurer-tokensjson-en-deux-couches-2026-07-31"
-status: "done today"
+status: "done"
 priority: "medium"
 assignee: null
 epic: null
 dueDate: null
 created: "2026-07-31T08:09:15.743Z"
-modified: "2026-07-31T12:34:51.258Z"
-completedAt: null
+modified: "2026-08-01T09:42:53.633Z"
+completedAt: "2026-08-01T09:42:53.633Z"
 labels: []
-order: "a2"
+order: "a9"
 ---
 # Structurer tokens.json en deux couches
 

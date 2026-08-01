@@ -2,7 +2,7 @@ import { ActivityIndicator, Pressable, type PressableProps } from 'react-native'
 
 import tokens from '../../theme/tailwind-tokens';
 
-import { Text } from './Text';
+import { Text, type TextColor } from './Text';
 
 export type ButtonVariant = 'primary' | 'secondary' | 'destructive';
 
@@ -13,25 +13,31 @@ export type ButtonVariant = 'primary' | 'secondary' | 'destructive';
  * en prop, pas en style. Elle vient donc du preset, jamais d'un littéral.
  */
 const VARIANT = {
-  // PrimaryButton A2/A3/A4/A5/C6, PrimaryCTAButton B1, StickyCTAButton C4
+  // PrimaryButton A2/A3/A4/A5/C6, PrimaryCTAButton B1, StickyCTAButton C4.
+  // Le contour n'est pas decoratif : l'aplat accent ne tient que 2.84:1 contre la page,
+  // c'est donc le filet qui rend le bouton identifiable (WCAG 1.4.11). Le retirer casse
+  // la conformite sans rien changer d'autre a l'ecran.
   primary: {
-    container: 'bg-action',
-    label: 'text-text-on-action',
+    container: 'bg-action border-hairline border-action-border',
+    label: 'on-action' as const,
     spinner: tokens.colors['text-on-action'],
   },
-  // LogoutButton D1, actions de second rang
+  // LogoutButton D1, actions de second rang.
+  // `control-border` et non `divider` : ce filet est la SEULE limite visible du bouton,
+  // il identifie donc le composant et doit tenir 3:1 (WCAG 1.4.11). `divider` est le
+  // filet decoratif des listes, volontairement laisse a 1.49:1.
   secondary: {
-    container: 'border-hairline border-divider',
-    label: 'text-text-default',
+    container: 'border-hairline border-control-border',
+    label: 'default' as const,
     spinner: tokens.colors['text-default'],
   },
   // DestructiveTextButton C6/C8/D1 — texte seul, aucun fond
   destructive: {
     container: '',
-    label: 'text-feedback-error',
+    label: 'error' as const,
     spinner: tokens.colors['feedback-error'],
   },
-} satisfies Record<ButtonVariant, { container: string; label: string; spinner: string }>;
+} satisfies Record<ButtonVariant, { container: string; label: TextColor; spinner: string }>;
 
 export type ButtonProps = Omit<PressableProps, 'children' | 'style'> & {
   children: string;
@@ -75,7 +81,7 @@ export function Button({
       {loading ? (
         <ActivityIndicator color={styles.spinner} />
       ) : (
-        <Text variant="button" className={styles.label}>
+        <Text variant="button" color={styles.label}>
           {children}
         </Text>
       )}

@@ -1,15 +1,15 @@
 ---
 id: "verrouiller-lanti-slop-2026-07-31"
-status: "todo"
+status: "done today"
 priority: "medium"
 assignee: null
 epic: null
 dueDate: null
 created: "2026-07-31T08:13:06.076Z"
-modified: "2026-07-31T08:13:14.275Z"
+modified: "2026-08-01T16:09:49.736Z"
 completedAt: null
 labels: []
-order: "a3zt"
+order: "a1"
 ---
 # Verrouiller l'anti-slop
 

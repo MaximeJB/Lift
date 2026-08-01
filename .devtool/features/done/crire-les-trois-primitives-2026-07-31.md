@@ -1,15 +1,15 @@
 ---
 id: "crire-les-trois-primitives-2026-07-31"
-status: "done today"
+status: "done"
 priority: "medium"
 assignee: null
 epic: null
 dueDate: null
 created: "2026-07-31T08:11:29.258Z"
-modified: "2026-07-31T13:35:39.751Z"
-completedAt: null
+modified: "2026-08-01T09:42:53.781Z"
+completedAt: "2026-08-01T09:42:53.781Z"
 labels: []
-order: "a4V"
+order: "aC"
 ---
 # Écrire les trois primitives
 

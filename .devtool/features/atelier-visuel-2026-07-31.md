@@ -1,12 +1,12 @@
 ---
 id: "atelier-visuel-2026-07-31"
-status: "in-progress"
+status: "done today"
 priority: "medium"
 assignee: null
 epic: null
 dueDate: null
 created: "2026-07-31T08:11:56.945Z"
-modified: "2026-07-31T13:40:32.039Z"
+modified: "2026-08-01T09:42:54.917Z"
 completedAt: null
 labels: []
 order: "a0"
