@@ -43,16 +43,28 @@ export type LoginResponse = {
  * FORME DIFFÉRENTE d'`AuthUser` : `LoginView` construit son dictionnaire à la main
  * alors que `/me/` passe par `PrivateUserSerializer`. Les deux ne se recouvrent pas.
  *
- * ABSENCE NOTABLE : `pseudo` n'y figure PAS. `PrivateUserSerializer.Meta.fields` ne le
- * liste pas, alors que D1 §6 demande de pouvoir le modifier. C'est la correction
- * backend « ajouter le champ pseudo à PrivateUserSerializer » de la Phase 5 — tant
- * qu'elle n'est pas faite, l'écran Profil ne peut ni lire ni écrire le pseudo.
- *
  * Source : accounts/serializers.py, PrivateUserSerializer.
  */
 export type UserProfile = {
   id: string;
   email: string;
+  /**
+   * Identifiant public, l'équivalent du `@`. Unique et insensible à la casse — la
+   * vérification est faite par `validate_pseudo` côté serveur, `unique=True` seul
+   * laisserait cohabiter « MaxLift » et « maxlift ».
+   *
+   * `null` est une valeur légale : la colonne accepte NULL, et `createsuperuser` ne
+   * demande pas de pseudo. C'est A3 qui l'exige à l'inscription, côté formulaire.
+   */
+  pseudo: string | null;
+  /**
+   * Date du dernier changement de pseudo, en lecture seule.
+   *
+   * `null` signifie « jamais changé depuis l'inscription » — dans ce cas le prochain
+   * changement est offert. Sinon le suivant n'est possible que 30 jours après cette
+   * date : fenêtre glissante, décision du 02/08/2026.
+   */
+  pseudo_updated_at: string | null;
   first_name: string;
   last_name: string;
   email_verified: boolean;
@@ -166,6 +178,12 @@ export type WorkoutSession = {
   template: string | null;
   title: string;
   date: string;
+  /**
+   * Instants de début et de fin, en ISO 8601 COMPLET — `2026-08-03T14:32:05Z`.
+   *
+   * Ce sont des `DateTimeField` côté Django malgré leur nom : ils portent la date et le
+   * fuseau, pas seulement l'heure. Envoyer `14:32:05` produit un 400.
+   */
   start_time: string | null;
   end_time: string | null;
   duration_minutes: number | null;

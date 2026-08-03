@@ -1,6 +1,6 @@
 /**
- * Verifie que toute classe utilitaire ecrite dans src/ existe reellement dans le
- * theme ferme.
+ * Verifie que toute classe utilitaire ecrite dans src/ et app/ existe reellement dans
+ * le theme ferme.
  *
  * Le theme etant ferme, une classe absente ne leve AUCUNE erreur : le composant
  * s'affiche simplement sans le style attendu. Ce controle transforme cet echec
@@ -49,7 +49,10 @@ const isUtility = (w) => /^[a-z][a-z0-9:-]*-[a-z0-9]/.test(w) || w === 'uppercas
 
 const used = new Map(); // classe -> fichiers
 
-for (const file of walk('src')) {
+// app/ AUTANT QUE src/. Le controle ne lisait que src/ jusqu'au 02/08/2026, alors que
+// les 13 ecrans vivent dans app/ : une classe hors theme ecrite dans un ecran passait
+// inapercue, et le style etait silencieusement ignore au rendu.
+for (const file of [...walk('src'), ...walk('app')]) {
   const txt = fs.readFileSync(file, 'utf8');
   const add = (w) => {
     if (!used.has(w)) used.set(w, new Set());

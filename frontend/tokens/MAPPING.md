@@ -4,7 +4,7 @@
 > `LIFT_Specification_Interface_V1.md` qui le justifie. Aucune valeur n'a été modifiée.
 >
 > **Source** : `lift-tokens.json` (34 tokens) · **Créé** : 2026-07-31 · **Atelier visuel** : 2026-08-01
-> **État** : 33 primitives · 31 rôles · 41 alias, tous résolus · tous les contrastes conformes
+> **État** : 33 primitives · 33 rôles · 43 alias, tous résolus · tous les contrastes conformes
 
 ---
 
@@ -37,7 +37,7 @@
 | `color.hairline`      | `#C6BDA9`                 | `rule.strong`                 | `color.divider`                                          | ListDivider C1 et C7, séparateurs SegmentedControl C3/C7/C1                                                                                                |
 | `color.hairline-soft` | `#CFC7B4`                 | `rule.weak`                   | **— orpheline**                                          | Aucun filet décoratif localisable dans les 13 écrans                                                                                                       |
 | `color.accent`        | `#D6552B` → **`#C14C27`** | `rust.base`                   | `color.action`<br>`color.diagram-muscle-primary`         | PrimaryButton A2/A3/A4/A5/C6, PrimaryCTAButton B1, StickyCTAButton C4, tab actif, segment actif, PRHighlightBanner C6<br>Muscle principal — BodyDiagram C2 |
-| `color.on-accent`     | `#FBF6EC`                 | `paper.bright`                | `color.text-on-action`                                   | Libellé de bouton primaire — mêmes écrans que `color.action`                                                                                               |
+| `color.on-accent`     | `#FBF6EC`                 | `paper.bright`                | `color.text-on-ink`                                      | Libellé sur aplat d'encre — chip sélectionné FilterChipsRow C1. Voir §7.8                                                                                               |
 | `color.alert`         | `#9A2A20`                 | `oxide.base`                  | `color.feedback-error`<br>`color.field-border-error`     | Erreur inline A2/A3/D1, DestructiveTextButton C6/C8/D1<br>Bordure de champ Error A2/A3/D1                                                                  |
 | `color.alert-bg`      | `#EAD7CF`                 | `oxide.tint`                  | `color.feedback-error-surface`                           | Fond ErrorBanner — A2/A3/A4, B1, C1, C3, C7                                                                                                                |
 | `color.alert-border`  | `#C98B7E`                 | `oxide.edge`                  | `color.feedback-error-border`                            | Bordure ErrorBanner — mêmes écrans                                                                                                                         |
@@ -207,6 +207,47 @@ contrainte §08 (« square-cornered, heavy rounding is off-system »). Le `4px` 
 - **Skeleton, variantes SetRow (Warmup / Failure), Pending sync, SuccessState A4,
   PasswordStrengthMeter A3, CategoryBadge 8 variantes** — composants métier qui n'existent pas
   encore, à trancher à l'étape 11.
+
+### 7.8 `paper.bright` retrouve un rôle — 02/08/2026
+
+L'atelier du 01/08 avait repointé `color.text-on-action` sur `{ink.strong}` (§7.2), laissant
+`paper.bright` `#FBF6EC` sans consommateur. La primitive est restée, faute de règle
+autorisant à supprimer.
+
+`FilterChipsRow` de C1 lui redonne un emploi. Le chip sélectionné s'affiche en inversion
+figure/fond — aplat `text-default`, libellé `text-on-ink` — forme retenue le 02/08/2026
+dans Storybook parmi trois propositions montées côte à côte sur les 18 vrais groupes
+musculaires. Les deux écartées passaient par la marque de `Checkbox` et par les crochets
+du `SegmentedControl` ; le motif du choix est la lisibilité de loin, sur un écran consulté
+en salle.
+
+| Rôle | Alias | Contraste |
+| ---- | ----- | --------- |
+| `color.text-on-ink` | `{paper.bright}` | **15,69:1** contre `ink.strong` |
+
+Le renversement n'est pas un emprunt : §03 de la Design-System-Specification le décrit
+comme un trait du système — « strong and often reversible, the same system runs as
+dark-figure-on-light and light-figure-on-dark ». Et la sélection n'est portée par aucune
+teinte, ce qui évite la pénalité B2 du barème.
+
+### 7.9 `type.section` — le titre de section quitte le monospace, 02/08/2026
+
+`SectionHeader` employait `type.mono-accent`, soit Cutive Mono 13px en capitales espacées.
+Signalé illisible sur C5, où le nom de l'exercice se lit **pendant l'effort**.
+
+Le §06 de la Design-System-Specification assigne pourtant le sans aux titres de structure
+— « grotesque / geometric sans, the neutral workhorse for structural headings » — et
+réserve le mono aux métadonnées et aux tableaux. L'emploi précédent allait contre la
+doctrine du système, pas seulement contre le confort de lecture.
+
+| Rôle | Famille | Corps | Casse |
+| ---- | ------- | ----- | ----- |
+| `type.section` | Inter 600 SemiBold | 18px | normale, tracking 0 |
+
+Ni capitales ni tracking : « Alternate Incline Dumbbell Curl » se lit plus vite en casse
+normale. `type.mono-accent` reste disponible pour ce qu'il sait faire — une étiquette
+ponctuelle, jamais un titre qu'on parcourt.
+
 
 ## 8 · Vérification finale
 

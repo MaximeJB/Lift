@@ -3,6 +3,7 @@ import { View } from 'react-native';
 
 import { Input } from './Input';
 import { PasswordInput } from './PasswordInput';
+import { PasswordStrengthMeter } from './PasswordStrengthMeter';
 import { SearchInput } from './SearchInput';
 
 const meta = {
@@ -41,4 +42,23 @@ export const MotDePasse: Story = {
 /** C1 — debounce 350ms, bouton effacer conditionnel. */
 export const Recherche: Story = {
   render: () => <SearchInput label="Rechercher" onSearch={() => {}} />,
+};
+
+/**
+ * A3 §7 — le barème sur trois mots de passe réels, du refusé au conforme.
+ *
+ * `lift` tient 2 critères (minuscule, sans triplé) et reste sous le plancher de 8
+ * caractères d'A3 §9 BR-3. `Bench-Press-2026` les tient tous les huit.
+ */
+export const ForceMotDePasse: Story = {
+  render: () => (
+    <View className="gap-3">
+      {['lift', 'benchpress', 'Bench-Press-2026'].map((mdp) => (
+        <View key={mdp} className="gap-1">
+          <PasswordInput label="Mot de passe" value={mdp} />
+          <PasswordStrengthMeter password={mdp} />
+        </View>
+      ))}
+    </View>
+  ),
 };

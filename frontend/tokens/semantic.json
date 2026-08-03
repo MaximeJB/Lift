@@ -1,7 +1,6 @@
 {
   "color": {
     "$description": "LIFT V1 — couche semantique. Chaque nom decrit une FONCTION dans l'interface, jamais une apparence. Chaque role est justifie par un ecran de LIFT_Specification_Interface_V1.md — voir MAPPING.md. Convention : categorie.role-variante, kebab-case.",
-
     "surface-page": {
       "$type": "color",
       "$value": "{paper.base}",
@@ -12,7 +11,6 @@
       "$value": "{paper.raised}",
       "$description": "Fond de champ, etat Default — A2/A3/A4/A5, SearchInput C1, SetInputForm C5, NotesInput C6, D1"
     },
-
     "text-default": {
       "$type": "color",
       "$value": "{ink.strong}",
@@ -33,7 +31,6 @@
       "$value": "{ink.strong}",
       "$description": "Libelle sur fond d'action — PrimaryButton A2/A3/A4/A5/C6, PrimaryCTAButton B1, StickyCTAButton C4. Encre sombre : un aplat accent assez clair pour porter du texte sombre ne peut pas tenir 3:1 contre la page, d'ou le contour action-border."
     },
-
     "divider": {
       "$type": "color",
       "$value": "{rule.strong}",
@@ -54,19 +51,16 @@
       "$value": "{oxide.base}",
       "$description": "Bordure de champ, etat Error — A2/A3, D1"
     },
-
     "action-border": {
       "$type": "color",
       "$value": "{ink.strong}",
       "$description": "Contour du bouton primaire. Sans lui l'aplat accent ne tient que 2.84:1 contre la page : c'est ce filet qui rend le bouton identifiable (WCAG 1.4.11)."
     },
-
     "action": {
       "$type": "color",
       "$value": "{rust.base}",
       "$description": "Accent unique. PrimaryButton A2/A3/A4/A5/C6, PrimaryCTAButton B1, StickyCTAButton C4, tab actif, segment actif C3/C7/C1, PRHighlightBanner C6"
     },
-
     "feedback-error": {
       "$type": "color",
       "$value": "{oxide.base}",
@@ -82,7 +76,6 @@
       "$value": "{oxide.edge}",
       "$description": "Bordure ErrorBanner — memes ecrans"
     },
-
     "diagram-muscle-primary": {
       "$type": "color",
       "$value": "{rust.base}",
@@ -92,12 +85,15 @@
       "$type": "color",
       "$value": "{ink.mid}",
       "$description": "Muscles secondaires surlignes — BodyDiagram C2. Distinction tonale, pas chromatique : contrainte systeme d'un seul accent sature par vue."
+    },
+    "text-on-ink": {
+      "$type": "color",
+      "$value": "{paper.bright}",
+      "$description": "Libelle sur aplat d'encre sombre - FilterChipsRow C1, chip selectionne. Retenu le 02/08/2026 parmi trois propositions. 15.69:1 contre ink.strong. Le renversement figure/fond est un trait revendique du systeme, Design-System-Specification 03."
     }
   },
-
   "type": {
     "$description": "Composites conserves intacts (decision Q5). textCase est une extension hors DTCG, traduite en textTransform par le composant Text. lineHeight ajoute en V1.",
-
     "wordmark": {
       "$type": "typography",
       "$value": {
@@ -166,7 +162,6 @@
       },
       "$description": "DescriptionText C2, description template C4, noms de liste C1/C3/C7, annexe CGU"
     },
-
     "mono-display": {
       "$type": "typography",
       "$value": {
@@ -211,9 +206,19 @@
         "lineHeight": "{line-height.tight}"
       },
       "$description": "Etiquette ponctuelle — MonthSectionHeader C7, en-tetes de section. JAMAIS en colonne ni en paragraphe : Cutive Mono imite une frappe usee."
+    },
+    "section": {
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{font.grotesque}",
+        "fontSize": "18px",
+        "fontWeight": 600,
+        "letterSpacing": "0px",
+        "lineHeight": "{line-height.tight}"
+      },
+      "$description": "Titre de section - nom d'exercice C5 et C8, en-tetes de section D1. Voix grotesque et non monospace : la Design-System-Specification 06 assigne le sans aux titres de structure, le mono aux metadonnees et aux tableaux. Ni capitales ni tracking : un nom comme Alternate Incline Dumbbell Curl se lit plus vite en casse normale."
     }
   },
-
   "radius": {
     "control": {
       "$type": "dimension",
@@ -221,7 +226,6 @@
       "$description": "Champs et boutons — A2/A3/A4/A5, B1, C4, C6, D1. Angle vif : contrainte systeme §08 « predominantly sharp, square-cornered »."
     }
   },
-
   "size": {
     "touch-target": {
       "$type": "dimension",

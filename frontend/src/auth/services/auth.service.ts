@@ -142,14 +142,21 @@ export function getMe(): Promise<UserProfile> {
  * `Partial` rend toutes les propriétés optionnelles : on n'envoie que ce qui change,
  * ce qui est exactement la sémantique d'un PATCH.
  *
- * Les champs en lecture seule (`id`, `email`, `created_at`, `email_verified`) sont
- * exclus du type d'entrée : les envoyer serait silencieusement ignoré par DRF, et rien
- * n'avertirait l'appelant que sa modification n'a pas pris.
+ * Les champs en lecture seule (`id`, `email`, `created_at`, `email_verified`,
+ * `pseudo_updated_at`) sont exclus du type d'entrée : les envoyer serait silencieusement
+ * ignoré par DRF, et rien n'avertirait l'appelant que sa modification n'a pas pris.
  *
- * @throws {ValidationError} valeur refusée (400)
+ * `email` en fait partie depuis le 02/08/2026 : c'est l'identifiant de connexion, il ne
+ * se change pas par un PATCH ordinaire sans re-authentification.
+ *
+ * @throws {ValidationError} valeur refusée (400) — dont « pseudo déjà pris » et le refus
+ *   de changer de pseudo moins de 30 jours après le précédent, tous deux sous la clé
+ *   `pseudo`
  * @throws {AuthError} aucune session valide
  */
-export type ProfileUpdate = Partial<Pick<UserProfile, 'first_name' | 'last_name' | 'profile_visibility'>>;
+export type ProfileUpdate = Partial<
+  Pick<UserProfile, 'pseudo' | 'first_name' | 'last_name' | 'profile_visibility'>
+>;
 
 export function updateMe(changes: ProfileUpdate): Promise<UserProfile> {
   return api.patch<UserProfile>(PATHS.me, changes);

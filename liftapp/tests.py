@@ -290,3 +290,370 @@ def test_ownership_other_user_cannot_access_session(api_client):
     api_client.force_authenticate(user=user_b)
     response = api_client.get(f'/api/lift/workout_session/{workout.id}/')
     assert response.status_code in [403, 404]
+
+
+# ─── API Exercise : filtres, classement, pagination (ticket 18) ────────────────
+#
+# Le classement a ete reecrit le 03/08/2026 : exercices connus d'abord, puis qualite de
+# correspondance, puis nom le plus court. Rien ne le protegeait.
+
+@pytest.fixture
+def catalogue(db):
+    """Petit catalogue aux proprietes controlees, pour juger l'ordre et les filtres."""
+    return {
+        'connu': Exercise.objects.create(
+            name='Bench Press', muscle_group='CHEST', external_id='hevy-1'
+        ),
+        'long': Exercise.objects.create(
+            name='Decline Barbell Bench Press', muscle_group='CHEST'
+        ),
+        'row_court': Exercise.objects.create(name='Row', muscle_group='BACK'),
+        'row_long': Exercise.objects.create(name='Barbell Bent Over Row', muscle_group='BACK'),
+        'squat': Exercise.objects.create(name='Squat', muscle_group='QUADS'),
+    }
+
+
+@pytest.mark.django_db
+def test_filtre_groupe_musculaire_unique(auth_client, catalogue):
+    reponse = auth_client.get('/api/lift/exercise/?muscle_group=CHEST')
+    assert reponse.status_code == 200
+    assert reponse.data['count'] == 2
+
+
+@pytest.mark.django_db
+def test_filtre_groupes_musculaires_donne_une_union(auth_client, catalogue):
+    """C1 §9 BR-3 : OU entre les chips. Deux groupes doivent donner PLUS de resultats."""
+    reponse = auth_client.get('/api/lift/exercise/?muscle_group=CHEST&muscle_group=BACK')
+    assert reponse.status_code == 200
+    assert reponse.data['count'] == 4
+
+
+@pytest.mark.django_db
+def test_filtre_groupe_musculaire_inconnu_est_refuse(auth_client, catalogue):
+    """Un choix hors des 18 doit lever, pas etre ignore en silence."""
+    reponse = auth_client.get('/api/lift/exercise/?muscle_group=PECTORAUX')
+    assert reponse.status_code == 400
+
+
+@pytest.mark.django_db
+def test_recherche_et_filtre_se_croisent(auth_client, catalogue):
+    """Entre la recherche et les groupes c'est un ET, entre deux groupes un OU."""
+    reponse = auth_client.get('/api/lift/exercise/?search=Bench&muscle_group=BACK')
+    assert reponse.data['count'] == 0
+
+    reponse = auth_client.get('/api/lift/exercise/?search=Bench&muscle_group=CHEST')
+    assert reponse.data['count'] == 2
+
+
+@pytest.mark.django_db
+def test_classement_les_exercices_connus_dabord(auth_client, catalogue):
+    """`external_id` non nul = apparie au catalogue Hevy, donc remonte en tete."""
+    reponse = auth_client.get('/api/lift/exercise/?muscle_group=CHEST')
+    assert reponse.data['results'][0]['name'] == 'Bench Press'
+
+
+@pytest.mark.django_db
+def test_classement_le_nom_le_plus_court_a_egalite(auth_client, catalogue):
+    """Aucun des deux n'est connu : c'est la longueur qui departage, donc le plus generique."""
+    reponse = auth_client.get('/api/lift/exercise/?muscle_group=BACK')
+    noms = [e['name'] for e in reponse.data['results']]
+    assert noms == ['Row', 'Barbell Bent Over Row']
+
+
+@pytest.mark.django_db
+def test_recherche_classe_exact_puis_commence_par_puis_contient(auth_client, db):
+    Exercise.objects.create(name='Preacher Curl', muscle_group='BICEPS')
+    Exercise.objects.create(name='Curl Machine', muscle_group='BICEPS')
+    Exercise.objects.create(name='Curl', muscle_group='BICEPS')
+
+    reponse = auth_client.get('/api/lift/exercise/?search=Curl')
+    noms = [e['name'] for e in reponse.data['results']]
+    assert noms == ['Curl', 'Curl Machine', 'Preacher Curl']
+
+
+@pytest.mark.django_db
+def test_la_recherche_decoupe_les_mots_et_les_exige_tous(auth_client, catalogue):
+    """SearchFilter separe la requete sur les espaces : ET entre les mots, OU entre les champs.
+
+    « bench press » remonte donc AUSSI « Decline Barbell Bench Press », qui contient les
+    deux mots sans les avoir cote a cote. Le comportement est celui de DRF, pas le notre ;
+    ce test le fige pour qu'un changement de version se voie.
+    """
+    reponse = auth_client.get('/api/lift/exercise/?search=bench press')
+    noms = [e['name'] for e in reponse.data['results']]
+    assert noms == ['Bench Press', 'Decline Barbell Bench Press']
+
+
+@pytest.mark.django_db
+def test_recherche_porte_aussi_sur_le_materiel(auth_client, db):
+    """`search_fields` couvre nom, description, groupe et materiel."""
+    Exercise.objects.create(name='Something', muscle_group='CHEST', equipment_needed='kettlebell')
+    reponse = auth_client.get('/api/lift/exercise/?search=kettlebell')
+    assert reponse.data['count'] == 1
+
+
+@pytest.mark.django_db
+def test_pagination_deux_pages_ne_se_recouvrent_pas(auth_client, db):
+    """Sans ordre stable, deux pages consecutives peuvent renvoyer le meme exercice."""
+    for i in range(30):
+        Exercise.objects.create(name=f'Exercice {i:02d}', muscle_group='CHEST')
+
+    page1 = auth_client.get('/api/lift/exercise/?limit=25&offset=0')
+    page2 = auth_client.get('/api/lift/exercise/?limit=25&offset=25')
+
+    ids1 = {e['id'] for e in page1.data['results']}
+    ids2 = {e['id'] for e in page2.data['results']}
+
+    assert len(ids1) == 25
+    assert len(ids2) == 5
+    assert ids1.isdisjoint(ids2)
+
+
+@pytest.mark.django_db
+def test_pagination_offset_au_dela_du_total_renvoie_une_liste_vide(auth_client, catalogue):
+    reponse = auth_client.get('/api/lift/exercise/?limit=25&offset=500')
+    assert reponse.status_code == 200
+    assert reponse.data['results'] == []
+
+
+@pytest.mark.django_db
+def test_exercice_inexistant_renvoie_404(auth_client, db):
+    reponse = auth_client.get('/api/lift/exercise/00000000-0000-0000-0000-000000000000/')
+    assert reponse.status_code == 404
+
+
+@pytest.mark.django_db
+def test_liste_vide_ne_leve_pas(auth_client, db):
+    reponse = auth_client.get('/api/lift/exercise/')
+    assert reponse.status_code == 200
+    assert reponse.data['count'] == 0
+
+
+# ─── Permissions, cascades et validations (ticket 19) ─────────────────────────
+
+@pytest.mark.django_db
+def test_seance_dun_autre_utilisateur_renvoie_404(auth_client, autre_user):
+    """404 et non 403 : le filtrage de queryset la fait disparaitre, elle n'existe pas."""
+    seance = WorkoutSession.objects.create(user=autre_user, title='Privee', date='2026-08-03')
+    reponse = auth_client.get(f'/api/lift/workout_session/{seance.id}/')
+    assert reponse.status_code == 404
+
+
+@pytest.mark.django_db
+def test_seance_dun_autre_utilisateur_absente_de_la_liste(auth_client, user, autre_user):
+    WorkoutSession.objects.create(user=autre_user, title='Privee', date='2026-08-03')
+    WorkoutSession.objects.create(user=user, title='Mienne', date='2026-08-03')
+
+    reponse = auth_client.get('/api/lift/workout_session/')
+    titres = [s['title'] for s in reponse.data['results']]
+    assert titres == ['Mienne']
+
+
+@pytest.mark.django_db
+def test_seance_dun_autre_utilisateur_non_supprimable(auth_client, autre_user):
+    seance = WorkoutSession.objects.create(user=autre_user, title='Privee', date='2026-08-03')
+    reponse = auth_client.delete(f'/api/lift/workout_session/{seance.id}/')
+    assert reponse.status_code == 404
+    assert WorkoutSession.objects.filter(pk=seance.pk).exists()
+
+
+@pytest.mark.django_db
+def test_serie_dun_autre_utilisateur_renvoie_404(auth_client, autre_user):
+    exercice = Exercise.objects.create(name='Bench Press', muscle_group='CHEST')
+    seance = WorkoutSession.objects.create(user=autre_user, title='Privee', date='2026-08-03')
+    serie = Set.objects.create(
+        workout_session=seance, exercise=exercice, set_number=1, weight_kg=80, reps=8
+    )
+
+    reponse = auth_client.get(f'/api/lift/set/{serie.id}/')
+    assert reponse.status_code == 404
+
+
+@pytest.mark.django_db
+def test_lutilisateur_est_pose_par_le_serveur_pas_par_le_corps(auth_client, user, autre_user):
+    """`perform_create` ecrase ce que le client pretend : `user` est en lecture seule."""
+    reponse = auth_client.post('/api/lift/workout_session/', {
+        'title': 'Tentative',
+        'date': '2026-08-03',
+        'user': str(autre_user.id),
+    })
+
+    assert reponse.status_code == 201
+    assert WorkoutSession.objects.get(pk=reponse.data['id']).user == user
+
+
+@pytest.mark.django_db
+def test_impossible_decrire_une_serie_dans_la_seance_dun_autre(auth_client, autre_user):
+    """Ferme le 03/08/2026 par SetSerializer.validate_workout_session."""
+    exercice = Exercise.objects.create(name='Bench Press', muscle_group='CHEST')
+    seance = WorkoutSession.objects.create(user=autre_user, title='Privee', date='2026-08-03')
+
+    reponse = auth_client.post('/api/lift/set/', {
+        'workout_session': str(seance.id),
+        'exercise': str(exercice.id),
+        'set_number': 1,
+        'weight_kg': 80,
+        'reps': 8,
+    })
+
+    assert reponse.status_code in (400, 403, 404)
+
+
+@pytest.mark.django_db
+def test_impossible_de_deplacer_une_serie_vers_la_seance_dun_autre(auth_client, user, autre_user):
+    """Le meme validateur tourne au PATCH : une serie a soi ne peut pas migrer chez autrui."""
+    exercice = Exercise.objects.create(name='Bench Press', muscle_group='CHEST')
+    mienne = WorkoutSession.objects.create(user=user, title='Mienne', date='2026-08-03')
+    sienne = WorkoutSession.objects.create(user=autre_user, title='Sienne', date='2026-08-03')
+    serie = Set.objects.create(
+        workout_session=mienne, exercise=exercice, set_number=1, weight_kg=80, reps=8
+    )
+
+    reponse = auth_client.patch(
+        f'/api/lift/set/{serie.id}/', {'workout_session': str(sienne.id)}
+    )
+
+    assert reponse.status_code == 400
+    serie.refresh_from_db()
+    assert serie.workout_session == mienne
+
+
+@pytest.mark.django_db
+def test_ecrire_une_serie_dans_sa_propre_seance_reste_possible(auth_client, user):
+    """Le garde-fou ne doit pas fermer le cas normal — c'est tout l'ecran C5."""
+    exercice = Exercise.objects.create(name='Bench Press', muscle_group='CHEST')
+    seance = WorkoutSession.objects.create(user=user, title='Mienne', date='2026-08-03')
+
+    reponse = auth_client.post('/api/lift/set/', {
+        'workout_session': str(seance.id),
+        'exercise': str(exercice.id),
+        'set_number': 1,
+        'weight_kg': 80,
+        'reps': 8,
+    })
+
+    assert reponse.status_code == 201
+
+
+@pytest.mark.django_db
+def test_supprimer_une_seance_supprime_ses_series(auth_client, user):
+    exercice = Exercise.objects.create(name='Bench Press', muscle_group='CHEST')
+    seance = WorkoutSession.objects.create(user=user, title='Mienne', date='2026-08-03')
+    Set.objects.create(
+        workout_session=seance, exercise=exercice, set_number=1, weight_kg=80, reps=8
+    )
+
+    auth_client.delete(f'/api/lift/workout_session/{seance.id}/')
+    assert Set.objects.count() == 0
+
+
+@pytest.mark.django_db
+def test_un_exercice_utilise_ne_peut_pas_etre_supprime(user):
+    """`Set.exercise` declare on_delete=PROTECT : l'historique ne doit pas se trouer."""
+    from django.db.models import ProtectedError
+
+    exercice = Exercise.objects.create(name='Bench Press', muscle_group='CHEST')
+    seance = WorkoutSession.objects.create(user=user, title='Mienne', date='2026-08-03')
+    Set.objects.create(
+        workout_session=seance, exercise=exercice, set_number=1, weight_kg=80, reps=8
+    )
+
+    with pytest.raises(ProtectedError):
+        exercice.delete()
+
+
+@pytest.mark.django_db
+def test_supprimer_un_template_laisse_la_seance_vivante(user):
+    """`WorkoutSession.template` declare on_delete=SET_NULL : la seance survit au programme."""
+    template = WorkoutTemplate.objects.create(name='Push', category='STRENGTH')
+    seance = WorkoutSession.objects.create(
+        user=user, title='Mienne', date='2026-08-03', template=template
+    )
+
+    template.delete()
+    seance.refresh_from_db()
+
+    assert seance.template is None
+
+
+@pytest.mark.django_db
+def test_deux_series_peuvent_porter_le_meme_numero(auth_client, user):
+    """Etat des lieux : aucune contrainte d'unicite sur (seance, exercice, set_number).
+
+    Le numero est pose par le client (C5 §9 BR-3). Ce test fige le comportement actuel :
+    s'il se met a echouer, c'est qu'une contrainte a ete ajoutee, et le client devra la
+    respecter.
+    """
+    exercice = Exercise.objects.create(name='Bench Press', muscle_group='CHEST')
+    seance = WorkoutSession.objects.create(user=user, title='Mienne', date='2026-08-03')
+
+    for _ in range(2):
+        reponse = auth_client.post('/api/lift/set/', {
+            'workout_session': str(seance.id),
+            'exercise': str(exercice.id),
+            'set_number': 1,
+            'weight_kg': 80,
+            'reps': 8,
+        })
+        assert reponse.status_code == 201
+
+
+@pytest.mark.xfail(
+    strict=True,
+    reason=(
+        "Le modele Set n'a AUCUN validateur : un poids negatif est accepte. C5 §9 BR-2 fait "
+        "porter la verification au client, ce qui ne protege pas l'API."
+    ),
+)
+@pytest.mark.django_db
+def test_un_poids_negatif_est_refuse(auth_client, user):
+    exercice = Exercise.objects.create(name='Bench Press', muscle_group='CHEST')
+    seance = WorkoutSession.objects.create(user=user, title='Mienne', date='2026-08-03')
+
+    reponse = auth_client.post('/api/lift/set/', {
+        'workout_session': str(seance.id),
+        'exercise': str(exercice.id),
+        'set_number': 1,
+        'weight_kg': -80,
+        'reps': 8,
+    })
+
+    assert reponse.status_code == 400
+
+
+@pytest.mark.xfail(
+    strict=True,
+    reason="Meme trou : zero repetition est accepte par l'API.",
+)
+@pytest.mark.django_db
+def test_zero_repetition_est_refuse(auth_client, user):
+    exercice = Exercise.objects.create(name='Bench Press', muscle_group='CHEST')
+    seance = WorkoutSession.objects.create(user=user, title='Mienne', date='2026-08-03')
+
+    reponse = auth_client.post('/api/lift/set/', {
+        'workout_session': str(seance.id),
+        'exercise': str(exercice.id),
+        'set_number': 1,
+        'weight_kg': 80,
+        'reps': 0,
+    })
+
+    assert reponse.status_code == 400
+
+
+@pytest.mark.django_db
+def test_serie_sans_seance_est_refusee(auth_client, db):
+    exercice = Exercise.objects.create(name='Bench Press', muscle_group='CHEST')
+    reponse = auth_client.post('/api/lift/set/', {
+        'exercise': str(exercice.id),
+        'set_number': 1,
+        'weight_kg': 80,
+        'reps': 8,
+    })
+    assert reponse.status_code == 400
+
+
+@pytest.mark.django_db
+def test_seance_non_authentifiee_renvoie_401(api_client, db):
+    reponse = api_client.get('/api/lift/workout_session/')
+    assert reponse.status_code == 401

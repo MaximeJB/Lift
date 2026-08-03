@@ -13,9 +13,11 @@ import { SplineSansMono_400Regular } from '@expo-google-fonts/spline-sans-mono/4
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
+import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
-import { AuthProvider } from '../src/shared/context/AuthContext';
+import { AuthProvider, useAuth } from '../src/shared/context/AuthContext';
 import tokens from '../src/shared/theme/tailwind-tokens';
 
 /**
@@ -58,31 +60,116 @@ const STORYBOOK_ENABLED = process.env.EXPO_PUBLIC_STORYBOOK_ENABLED === 'true';
 
 SplashScreen.preventAutoHideAsync();
 
+/**
+ * A1 — Auth Gate.
+ *
+ * Cet écran n'en est pas un : c'est l'absence d'écran pendant que la session se résout.
+ * A1 §16 : « ne s'affiche jamais plus de quelques secondes, ne contient jamais d'action
+ * utilisateur, est toujours suivi d'une redirection ».
+ *
+ * `Stack.Protected` RETIRE les routes du navigateur au lieu de rediriger vers elles.
+ * Conséquence directe : aucun clignotement, et surtout aucune fenêtre pendant laquelle
+ * un utilisateur déconnecté verrait les onglets avant d'être renvoyé au Login.
+ *
+ * L'écran de démarrage natif reste affiché tant que les polices ET la session ne sont
+ * pas résolues — sans quoi on verrait un fond nu, puis les polices, puis la redirection.
+ */
+function RootNavigator({ fontsReady }: { fontsReady: boolean }) {
+  const { session } = useAuth();
+
+  const pret = fontsReady && session.status !== 'loading';
+
+  useEffect(() => {
+    if (pret) SplashScreen.hideAsync();
+  }, [pret]);
+
+  if (!pret) return null;
+
+  const connecte = session.status === 'authenticated';
+
+  return (
+    <Stack screenOptions={{ headerShown: false }}>
+      <Stack.Protected guard={connecte}>
+        <Stack.Screen name="(tabs)" />
+      </Stack.Protected>
+
+      <Stack.Protected guard={!connecte}>
+        <Stack.Screen name="(auth)" />
+      </Stack.Protected>
+
+      {/*
+        HORS DES DEUX GARDES, à dessein. Ces deux écrans sont atteignables dans les deux
+        états de session : depuis la case de consentement d'A3 avant l'inscription, et
+        depuis le menu Paramètres une fois connecté — décision du 02/08/2026. Les placer
+        dans `(auth)` les aurait rendus introuvables au premier utilisateur inscrit,
+        puisque `Stack.Protected` RETIRE les routes du navigateur au lieu de les masquer.
+      */}
+      <Stack.Screen name="cgu" />
+      <Stack.Screen name="confidentialite" />
+    </Stack>
+  );
+}
+
 export default function RootLayout() {
   // Les hooks restent inconditionnels : Storybook a besoin des memes polices que l'app.
   const [loaded, error] = useFonts(FONTS);
+  const fontsReady = loaded || Boolean(error);
 
+  // Storybook n'a pas de session à attendre : l'écran de démarrage se retire dès que
+  // les polices sont prêtes. Sans ça, le catalogue resterait masqué indéfiniment —
+  // `preventAutoHideAsync` est appelé au niveau module, et seul RootNavigator le lève.
   useEffect(() => {
-    if (loaded || error) SplashScreen.hideAsync();
-  }, [loaded, error]);
-
-  // Rien n'est rendu tant que les polices ne sont pas prêtes : évite le flash de
-  // police système au démarrage.
-  if (!loaded && !error) return null;
+    if (STORYBOOK_ENABLED && fontsReady) SplashScreen.hideAsync();
+  }, [fontsReady]);
 
   if (STORYBOOK_ENABLED) {
     // require paresseux : quand le drapeau est faux, Metro a deja retire ces modules
     // du bundle, un import statique casserait la build de production.
     // eslint-disable-next-line @typescript-eslint/no-require-imports -- import statique impossible ici
     const StorybookUI = require('../.rnstorybook').default;
-    return <StorybookUI />;
+    return (
+      <SafeAreaProvider>
+        <SafeAreaView edges={['top']} className="flex-1 bg-surface-page">
+          <StatusBar style="dark" />
+          <StorybookUI />
+        </SafeAreaView>
+      </SafeAreaProvider>
+    );
   }
 
-  // AuthProvider enveloppe la navigation, PAS Storybook : le catalogue de composants
-  // n'a aucune session et ne doit pas déclencher d'appel réseau au montage.
+  /**
+   * L'ENCOCHE EST TRAITÉE ICI, UNE FOIS, POUR TOUS LES ÉCRANS.
+   *
+   * `headerShown: false` est posé sur toutes les piles — chaque écran dessine son propre
+   * en-tête. Conséquence mécanique : plus rien n'écarte le contenu de la barre d'état, et
+   * il démarre à y=0, sous l'encoche. Sur un iPhone 12 mini, ce sont 50pt de contenu
+   * masqués, et surtout intappables : la barre d'état capte les touchers.
+   *
+   * Un `SafeAreaView` par écran serait la même chose écrite treize fois, avec l'oubli
+   * garanti au quatorzième. `useSafeAreaInsets` + padding manuel imposerait en plus une
+   * valeur de marge à chaque écran, ce que le thème fermé rend justement impossible.
+   *
+   * `edges={['top']}` seulement : le bas appartient à `TabBar`, qui pose son propre
+   * `SafeAreaView edges={['bottom']}` pour que sa matière coure jusqu'au bord. Deux
+   * `SafeAreaView` imbriqués ADDITIONNENT leurs marges — mettre `bottom` ici doublerait
+   * l'écart sous la barre d'onglets.
+   *
+   * `SafeAreaProvider` est explicite plutôt que légué par React Navigation : Storybook,
+   * lui, n'a aucun navigateur au-dessus.
+   *
+   * AuthProvider enveloppe la navigation, PAS Storybook : le catalogue de composants n'a
+   * aucune session et ne doit pas déclencher d'appel réseau au montage.
+   */
   return (
-    <AuthProvider>
-      <Stack screenOptions={{ headerShown: false }} />
-    </AuthProvider>
+    <SafeAreaProvider>
+      <SafeAreaView edges={['top']} className="flex-1 bg-surface-page">
+        {/* Encre sombre sur papier chaud : `auto` retomberait sur le thème du système,
+            qui n'a aucun rapport avec le fond de l'app. */}
+        <StatusBar style="dark" />
+        <AuthProvider>
+          <RootNavigator fontsReady={fontsReady} />
+        </AuthProvider>
+      </SafeAreaView>
+    </SafeAreaProvider>
   );
 }

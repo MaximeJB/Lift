@@ -8,6 +8,7 @@ import {
   isTokenValid,
   refreshSession,
   setSessionExpiredHandler,
+  setStoredUser,
   type AuthUser,
 } from '../api';
 import * as authService from '../../auth/services/auth.service';
@@ -32,6 +33,14 @@ type AuthContextValue = {
   login: (email: string, password: string) => Promise<void>;
   /** @throws {ValidationError} email ou pseudo pris · {NetworkError} serveur injoignable */
   register: (input: RegisterInput) => Promise<void>;
+  /**
+   * Remplace l'utilisateur mémorisé après une modification de profil — D1.
+   *
+   * Sans cet appel, changer son pseudo dans D1 ne mettrait à jour que la réponse de
+   * `/me/` : l'utilisateur gardé en SecureStore garderait l'ancien pseudo, et A1 §9 BR-5
+   * — l'accès optimiste hors ligne — afficherait un nom périmé au démarrage suivant.
+   */
+  majUtilisateur: (user: AuthUser) => Promise<void>;
   logout: () => Promise<void>;
 };
 
@@ -138,6 +147,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setSession({ status: 'authenticated', user });
   }, []);
 
+  /**
+   * L'utilisateur COMPLET est attendu, pas un fragment à fusionner : l'appelant sort de
+   * `PATCH /api/auth/me/` et connaît donc l'état retenu par le serveur. Fusionner ici
+   * demanderait de lire l'état courant depuis le setter, et une écriture SecureStore
+   * dans un `setState` en ferait un effet de bord au mauvais endroit.
+   */
+  const majUtilisateur = useCallback(async (user: AuthUser) => {
+    await setStoredUser(user);
+    setSession({ status: 'authenticated', user });
+  }, []);
+
   const logout = useCallback(async () => {
     await authService.logout();
     setSession({ status: 'unauthenticated' });
@@ -150,8 +170,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
    * provider, même si la session n'a pas bougé.
    */
   const value = useMemo(
-    () => ({ session, login, register, logout }),
-    [session, login, register, logout],
+    () => ({ session, login, register, majUtilisateur, logout }),
+    [session, login, register, majUtilisateur, logout],
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

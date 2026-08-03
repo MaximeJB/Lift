@@ -4,7 +4,7 @@ import tokens from '../../theme/tailwind-tokens';
 
 import { Text, type TextColor } from './Text';
 
-export type ButtonVariant = 'primary' | 'secondary' | 'destructive';
+export type ButtonVariant = 'primary' | 'secondary' | 'accent-outline' | 'destructive';
 
 /**
  * Table variante → classes, écrites en toutes lettres (cf. Text.tsx).
@@ -28,6 +28,20 @@ const VARIANT = {
   // filet decoratif des listes, volontairement laisse a 1.49:1.
   secondary: {
     container: 'border-hairline border-control-border',
+    label: 'default' as const,
+    spinner: tokens.colors['text-default'],
+  },
+  // AddExerciseButton C5 — contour accent, fond papier.
+  //
+  // ECART ASSUME a la contrainte §12, « never more than one saturated accent colour in a
+  // single view » : sur C5, l'aplat accent du bouton de validation et ce contour
+  // coexistent. Demande du 03/08/2026 — le bouton d'ajout d'exercice ne se trouvait pas
+  // du premier coup d'oeil. Les deux emplois restent distincts, aplat contre filet.
+  //
+  // Le contour tient 3:1 contre la page (rust.deep, 3.31:1), il identifie donc bien le
+  // composant au sens de WCAG 1.4.11.
+  'accent-outline': {
+    container: 'border-hairline border-control-border-focus',
     label: 'default' as const,
     spinner: tokens.colors['text-default'],
   },

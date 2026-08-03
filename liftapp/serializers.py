@@ -35,6 +35,23 @@ class SetSerializer(serializers.ModelSerializer):
                   'reps', 'rpe', 'duration_seconds', 'rest_seconds', 'notes',
                   'is_warmup', 'is_failure', 'created_at', 'updated_at'
                   ,'synced_at',]
+
+    def validate_workout_session(self, value):
+        """Interdit d'ecrire une serie dans la seance de quelqu'un d'autre.
+
+        IsOwner ne couvre pas la creation : au moment ou la permission d'objet
+        s'evalue, la serie n'existe pas encore, donc il n'y a aucun proprietaire a
+        comparer. Sans ce controle, connaitre l'UUID d'une seance suffit pour y
+        injecter des series.
+
+        Vaut aussi pour le PATCH, ce qui ferme le deplacement d'une serie existante
+        vers la seance d'autrui.
+        """
+        requete = self.context.get('request')
+        # Pas de requete : appel depuis un script ou un test unitaire, rien a comparer.
+        if requete is not None and value.user != requete.user:
+            raise serializers.ValidationError("Cette seance ne vous appartient pas.")
+        return value
     
 class WorkoutSessionSerializer(serializers.ModelSerializer):
     sets = SetSerializer(many=True, read_only=True)

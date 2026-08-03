@@ -142,6 +142,18 @@ export const http: AxiosInstance = create({
   baseURL: API_BASE_URL,
   timeout: REQUEST_TIMEOUT_MS,
   headers: { 'Content-Type': 'application/json' },
+  /**
+   * Un paramètre à valeurs multiples est répété tel quel, sans crochets.
+   *
+   *   indexes: null  →  ?muscle_group=CHEST&muscle_group=BACK
+   *   défaut d'axios →  ?muscle_group[]=CHEST&muscle_group[]=BACK
+   *
+   * Django lit ces valeurs avec `request.GET.getlist('muscle_group')`, qui ne connaît
+   * pas la clé `muscle_group[]` : la forme par défaut d'axios ferait silencieusement
+   * ignorer tous les filtres. C1 §9 BR-3 en dépend — c'est ce qui rend le OU possible
+   * entre les chips.
+   */
+  paramsSerializer: { indexes: null },
 });
 
 /** Injecte le jeton d'accès, s'il existe. Les endpoints publics fonctionnent sans. */

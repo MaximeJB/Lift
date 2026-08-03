@@ -1,15 +1,15 @@
 ---
 id: "9-crer-le-guard-de-navigation-auth-vs-app-2026-07-28"
-status: "todo"
+status: "in-progress"
 priority: "medium"
 assignee: null
 epic: null
 dueDate: null
 created: "2026-07-28T13:44:07.667Z"
-modified: "2026-07-28T14:23:23.576Z"
+modified: "2026-08-03T08:46:29.286Z"
 completedAt: null
 labels: []
-order: "a7l"
+order: "a0"
 ---
 # 9. Créer le guard de navigation (Auth vs App)
 

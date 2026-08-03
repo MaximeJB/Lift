@@ -30,7 +30,22 @@ export type InputProps = Omit<TextInputProps, 'style' | 'placeholderTextColor'> 
  *   Focus    control-border-focus   3.31:1 — le champ actif est le point accentue
  *   Error    field-border-error
  */
-export function Input({ label, error, trailing, ...rest }: InputProps) {
+/**
+ * `onFocus` et `onBlur` sont EXTRAITS des props, jamais laisses dans `...rest`.
+ *
+ * Le spread est applique en dernier sur le TextInput : un `onBlur` passe par l'appelant
+ * ECRASAIT celui qui remet le filet en etat Default. Le champ restait alors marque comme
+ * actif apres l'avoir quitte, sans aucune erreur pour le signaler. Constate le 02/08/2026
+ * sur A3, qui pose un `onBlur` sur ses quatre champs.
+ */
+export function Input({
+  label,
+  error,
+  trailing,
+  onFocus,
+  onBlur,
+  ...rest
+}: InputProps) {
   const [focused, setFocused] = useState(false);
 
   const borderClass = error
@@ -49,10 +64,16 @@ export function Input({ label, error, trailing, ...rest }: InputProps) {
         <TextInput
           className="flex-1 text-input font-input tracking-input leading-relaxed text-text-default"
           placeholderTextColor={tokens.colors['text-placeholder']}
-          onFocus={() => setFocused(true)}
-          onBlur={() => setFocused(false)}
           accessibilityLabel={label}
           {...rest}
+          onFocus={(e) => {
+            setFocused(true);
+            onFocus?.(e);
+          }}
+          onBlur={(e) => {
+            setFocused(false);
+            onBlur?.(e);
+          }}
         />
         {trailing}
       </View>

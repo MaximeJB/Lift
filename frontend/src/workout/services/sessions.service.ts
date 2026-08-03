@@ -51,6 +51,13 @@ export type CreateSessionInput = {
   template?: string | null;
   /** Format `AAAA-MM-JJ`. Omis, le serveur met la date du jour. */
   date?: string;
+  /**
+   * Instant de début, en ISO 8601 complet — `2026-08-03T14:32:05.000Z`.
+   *
+   * MALGRÉ SON NOM, c'est un `DateTimeField` côté Django, pas un `TimeField`. Une heure
+   * seule (`14:32:05`) est refusée avec « Datetime has wrong format », et la création de
+   * séance échoue avant que l'utilisateur ait saisi quoi que ce soit.
+   */
   start_time?: string;
   notes?: string;
 };

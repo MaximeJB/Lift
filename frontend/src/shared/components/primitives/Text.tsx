@@ -2,6 +2,7 @@ import { Text as RNText, type TextProps as RNTextProps } from 'react-native';
 
 export type TextVariant =
   | 'wordmark'
+  | 'section'
   | 'input'
   | 'button'
   | 'label'
@@ -13,7 +14,14 @@ export type TextVariant =
   | 'mono-meta'
   | 'mono-accent';
 
-export type TextColor = 'default' | 'support' | 'placeholder' | 'on-action' | 'error';
+export type TextColor =
+  | 'default'
+  | 'support'
+  | 'placeholder'
+  | 'on-action'
+  // Libelle sur aplat d'encre sombre — chip selectionne de FilterChipsRow C1.
+  | 'on-ink'
+  | 'error';
 
 /**
  * Classes TYPOGRAPHIQUES seulement — aucune couleur ici.
@@ -24,6 +32,9 @@ export type TextColor = 'default' | 'support' | 'placeholder' | 'on-action' | 'e
 const VARIANT_CLASSES: Record<TextVariant, string> = {
   // SplashLogo A1, header logo A2 et A3
   wordmark: 'text-wordmark font-wordmark tracking-wordmark leading-tight',
+  // Titre de section — nom d'exercice C5/C8, en-tetes D1. Voix grotesque : le §06 de la
+  // Design-System-Specification reserve le mono aux metadonnees et aux tableaux.
+  section: 'text-section font-section tracking-section leading-tight',
   // Tous les TextInput — 16px impose par l'anti-zoom iOS
   input: 'text-input font-input tracking-input leading-relaxed',
   // Libelles de bouton — voix machine
@@ -51,12 +62,14 @@ const COLOR_CLASSES: Record<TextColor, string> = {
   support: 'text-text-support',
   placeholder: 'text-text-placeholder',
   'on-action': 'text-text-on-action',
+  'on-ink': 'text-text-on-ink',
   error: 'text-feedback-error',
 };
 
 /** Couleur par defaut de chaque variante, telle que decrite dans la spec d'interface. */
 const VARIANT_COLOR: Record<TextVariant, TextColor> = {
   wordmark: 'default',
+  section: 'default',
   input: 'default',
   button: 'default',
   label: 'support',

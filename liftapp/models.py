@@ -44,6 +44,12 @@ MUSCLE_GROUP_CHOICES = [
 class MuscleGroup(models.Model):
     name = models.CharField(max_length=200, unique=True, choices=MUSCLE_GROUP_CHOICES)
 
+    def __str__(self):
+        # ExerciseSerializer sérialise secondary_muscle_groups avec StringRelatedField,
+        # qui appelle str() sur chaque objet. Sans cette méthode, l'API renvoyait
+        # "MuscleGroup object (3)" au lieu de "TRICEPS".
+        return self.name
+
 class Exercise(models.Model):
     
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)

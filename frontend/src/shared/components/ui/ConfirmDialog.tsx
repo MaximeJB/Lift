@@ -1,6 +1,6 @@
 import { Modal, View } from 'react-native';
 
-import { Button } from '../primitives/Button';
+import { Button, type ButtonVariant } from '../primitives/Button';
 import { Hairline } from '../primitives/Hairline';
 import { Text } from '../primitives/Text';
 
@@ -27,6 +27,15 @@ export type ConfirmDialogProps = {
    * prouverait l'intention, pas l'identite.
    */
   children?: React.ReactNode;
+  /**
+   * Voix du bouton de confirmation. `destructive` par defaut — rouge, texte seul.
+   *
+   * `primary` sert aux confirmations qui n'effacent RIEN : commencer une seance en est
+   * une. Peindre en rouge une action qu'on souhaite faire apprend a l'utilisateur a
+   * ignorer la couleur d'alerte, et c'est exactement ce qu'on ne veut pas le jour ou
+   * elle porte une suppression.
+   */
+  confirmVariant?: ButtonVariant;
 };
 
 /**
@@ -52,6 +61,7 @@ export function ConfirmDialog({
   onConfirm,
   onCancel,
   children,
+  confirmVariant = 'destructive',
 }: ConfirmDialogProps) {
   return (
     <Modal visible={visible} transparent animationType="fade" onRequestClose={onCancel}>
@@ -89,7 +99,7 @@ export function ConfirmDialog({
             <Button variant="secondary" onPress={onCancel}>
               Annuler
             </Button>
-            <Button variant="destructive" onPress={onConfirm}>
+            <Button variant={confirmVariant} onPress={onConfirm}>
               {confirmLabel}
             </Button>
           </View>

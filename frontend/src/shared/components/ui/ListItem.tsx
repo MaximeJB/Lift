@@ -22,6 +22,14 @@ export type ListItemProps = {
   leading?: React.ReactNode;
   trailing?: React.ReactNode;
   onPress?: () => void;
+  /**
+   * Voix du titre. `body` par defaut — 14px, le registre d'une ligne qu'on parcourt.
+   *
+   * `section` passe a Inter 18 : reserve aux listes COURTES dont chaque ligne est une
+   * destination en soi, pas un element parmi 873. Introduit le 03/08/2026 pour l'atelier
+   * de C3, ou l'ecran ne porte qu'une poignee de cartes.
+   */
+  titleVariant?: 'body' | 'section';
 };
 
 /**
@@ -47,12 +55,13 @@ export function ListItem({
   leading,
   trailing,
   onPress,
+  titleVariant = 'body',
 }: ListItemProps) {
   const content = (
     <View className="min-h-touch justify-center gap-1 py-2">
       <View className="flex-row items-center gap-3">
         {leading}
-        <Text variant="body" className="flex-1">
+        <Text variant={titleVariant} className="flex-1">
           {title}
         </Text>
         {trailing}

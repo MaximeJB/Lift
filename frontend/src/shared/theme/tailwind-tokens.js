@@ -20,6 +20,7 @@ module.exports = {
     "feedback-error-border": "#C98B7E",
     "diagram-muscle-primary": "#E15F35",
     "diagram-muscle-secondary": "#57503F",
+    "text-on-ink": "#FBF6EC",
     "transparent": "transparent"
   },
   "spacing": {
@@ -66,6 +67,9 @@ module.exports = {
     ],
     "mono-accent": [
       "CutiveMono_400Regular"
+    ],
+    "section": [
+      "Inter_600SemiBold"
     ]
   },
   "fontsToLoad": [
@@ -87,7 +91,8 @@ module.exports = {
     "mono-display": "26px",
     "mono-dense": "14px",
     "mono-meta": "13px",
-    "mono-accent": "13px"
+    "mono-accent": "13px",
+    "section": "18px"
   },
   "letterSpacing": {
     "wordmark": "5px",
@@ -99,7 +104,8 @@ module.exports = {
     "mono-display": "0px",
     "mono-dense": "0px",
     "mono-meta": "0px",
-    "mono-accent": "1.5px"
+    "mono-accent": "1.5px",
+    "section": "0px"
   },
   "lineHeight": {
     "tight": "1.2",
@@ -184,6 +190,13 @@ module.exports = {
       "letterSpacing": "1.5px",
       "lineHeight": "1.2",
       "textCase": "uppercase"
+    },
+    "section": {
+      "fontFamily": "Inter_600SemiBold",
+      "fontSize": "18px",
+      "fontWeight": "600",
+      "letterSpacing": "0px",
+      "lineHeight": "1.2"
     }
   }
 };

@@ -1,6 +1,7 @@
 import uuid
 from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager
+from django.forms.fields import DateTimeField
 
 class CustomUserManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
@@ -25,6 +26,7 @@ class CustomUser(AbstractUser):
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     pseudo = models.CharField(max_length=100, blank=True, null=True,unique=True)
+    pseudo_updated_at = models.DateTimeField(null=True, blank=True)
     email = models.EmailField(unique=True, blank=False, null=False)
     email_verified = models.BooleanField(default=False)
     profile_visibility = models.CharField(max_length=10, choices = profile_visibility_choices, default='PUBLIC')
@@ -37,3 +39,6 @@ class CustomUser(AbstractUser):
     
     def __str__(self):
         return f"{self.pseudo}, {self.email}"
+    
+    def can_change_pseudo():
+        pass
