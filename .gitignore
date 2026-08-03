@@ -1,8 +1,16 @@
 .env
 CLAUDE.md
 .venv/
-.__pycache__/
 venv
+
+# Python — le motif etait ecrit `.__pycache__/`, avec un point devant, donc il ne
+# correspondait a rien : 71 fichiers compiles etaient suivis.
+__pycache__/
+*.pyc
+
+# tests — rapports regeneres a chaque `pytest --cov`
+.coverage
+htmlcov/
 spec.md
 .claude/
 .vscode
