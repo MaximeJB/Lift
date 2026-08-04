@@ -416,16 +416,9 @@ def test_register_refuse_deux_mots_de_passe_differents(api_client):
     assert reponse.status_code == 400
 
 
-@pytest.mark.xfail(
-    strict=True,
-    reason=(
-        "UserRegistrationSerializer.validate leve une ValidationError SANS message. Le "
-        "client recoit une erreur vide, d'ou le contournement cote A3. A corriger en "
-        "passant un message a l'exception."
-    ),
-)
 @pytest.mark.django_db
 def test_le_refus_de_mot_de_passe_porte_un_message_lisible(api_client):
+    """Ferme le 03/08/2026 : le raise nu porte desormais un dict avec un message."""
     reponse = api_client.post('/api/auth/register/', {
         'email': 'new@test.fr',
         'password': 'testpass123',
@@ -436,15 +429,9 @@ def test_le_refus_de_mot_de_passe_porte_un_message_lisible(api_client):
     assert 'mot de passe' in messages or 'password' in messages
 
 
-@pytest.mark.xfail(
-    strict=True,
-    reason=(
-        "validate_password() de Django n'est pas appele a l'inscription : un mot de passe "
-        "de quatre caracteres est accepte. A3 §9 BR-3 fait porter la regle au client seul."
-    ),
-)
 @pytest.mark.django_db
 def test_un_mot_de_passe_trop_faible_est_refuse(api_client):
+    """Ferme le 03/08/2026 par UserRegistrationSerializer.validate_password."""
     reponse = api_client.post('/api/auth/register/', {
         'email': 'new@test.fr',
         'password': '1234',
@@ -470,15 +457,19 @@ def test_le_rafraichissement_renvoie_un_nouveau_jeton(api_client, user):
 
 
 @pytest.mark.django_db
-def test_lancien_refresh_reste_valable_apres_rotation(api_client, user):
-    """ETAT DES LIEUX, ET RISQUE ASSUME.
+def test_un_refresh_deja_consomme_est_refuse(api_client, user):
+    """Reecrit le 03/08/2026, dans l'autre sens.
 
-    `ROTATE_REFRESH_TOKENS` est a True mais `BLACKLIST_AFTER_ROTATION` a False : l'ancien
-    jeton continue d'etre accepte jusqu'a son expiration, un jour plus tard. Un jeton vole
-    avant une deconnexion reste donc utilisable.
+    Ce test s'appelait `test_lancien_refresh_reste_valable_apres_rotation` et figeait un
+    risque assume : la rotation emettait un nouveau jeton, mais l'ancien restait accepte
+    jusqu'a son expiration, un jour plus tard.
 
-    Ce test fige le comportement actuel. Le jour ou la liste noire sera activee, il
-    echouera — et ce sera le signal que la securite s'est amelioree.
+    `BLACKLIST_AFTER_ROTATION` est desormais actif. Un jeton consomme est revoque
+    immediatement, donc la fenetre de 24h sur un jeton vole est fermee.
+
+    Un rejeu qui repasse a 200 signalerait que le reglage ou l'app `token_blacklist` a
+    saute — SimpleJWT ne se plaint pas dans ce cas, il rattrape l'AttributeError en
+    silence, et seul ce test le verrait.
     """
     login = api_client.post('/api/auth/login/', {
         'email': 'test@lift.com',
@@ -489,7 +480,7 @@ def test_lancien_refresh_reste_valable_apres_rotation(api_client, user):
     api_client.post('/api/auth/token/refresh/', {'refresh': ancien})
     rejoue = api_client.post('/api/auth/token/refresh/', {'refresh': ancien})
 
-    assert rejoue.status_code == 200
+    assert rejoue.status_code == 401
 
 
 @pytest.mark.django_db
@@ -504,16 +495,9 @@ def test_un_refresh_sans_corps_est_refuse(api_client, db):
     assert reponse.status_code == 400
 
 
-@pytest.mark.xfail(
-    strict=True,
-    reason=(
-        "DEFAUT : rafraichir avec le jeton d'un compte supprime leve CustomUser.DoesNotExist "
-        "et remonte en 500 au lieu d'un 401. Un compte supprime dont le jeton traine fait "
-        "donc planter le serveur au lieu d'etre econduit."
-    ),
-)
 @pytest.mark.django_db
 def test_le_refresh_dun_utilisateur_supprime_est_refuse(api_client, user):
+    """Ferme le 03/08/2026 par TokenRefreshRobusteSerializer."""
     login = api_client.post('/api/auth/login/', {
         'email': 'test@lift.com',
         'password': 'testpass123',

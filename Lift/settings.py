@@ -45,6 +45,10 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'rest_framework_simplejwt',
+    # Apporte les tables qui retiennent les jetons revoques. Sans cette app, le reglage
+    # BLACKLIST_AFTER_ROTATION est ignore en silence : SimpleJWT rattrape l'AttributeError
+    # et continue comme si de rien n'etait.
+    'rest_framework_simplejwt.token_blacklist',
     'accounts',
     'bjjapp',
     'allauth',
@@ -187,5 +191,16 @@ SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=180),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
     "ROTATE_REFRESH_TOKENS": True,
-    "BLACKLIST_AFTER_ROTATION": False,
-    "UPDATE_LAST_LOGIN": False,}
+    # Un refresh consomme son predecesseur. Sans ca, la rotation emet bien un nouveau
+    # jeton mais l'ancien reste accepte jusqu'a son expiration, un jour plus tard : un
+    # jeton vole avant une deconnexion restait utilisable 24h.
+    # Le cout est une ligne ecrite par rafraichissement. Avec un token d'acces de 180
+    # minutes, ca fait environ une ecriture toutes les trois heures par utilisateur actif.
+    # Purge : `python manage.py flushexpiredtokens`, a planifier avant la mise en ligne.
+    "BLACKLIST_AFTER_ROTATION": True,
+    "UPDATE_LAST_LOGIN": False,
+    # Remplace le serialiseur de rafraichissement par le notre, qui rattrape le cas d'un
+    # compte supprime. Passer par ce reglage plutot que par une vue dans urls.py : la vue
+    # de SimpleJWT lit cette cle, donc accounts/urls.py n'a pas a changer.
+    "TOKEN_REFRESH_SERIALIZER": "accounts.serializers.TokenRefreshRobusteSerializer",
+}

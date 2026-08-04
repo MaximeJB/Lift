@@ -1,5 +1,10 @@
 from rest_framework import serializers
 from django.contrib.auth import authenticate
+from django.contrib.auth.password_validation import validate_password
+from django.core.exceptions import ObjectDoesNotExist
+from django.core.exceptions import ValidationError as DjangoValidationError
+from rest_framework.exceptions import AuthenticationFailed
+from rest_framework_simplejwt.serializers import TokenRefreshSerializer
 from accounts.models import CustomUser
 import re
 from datetime import timedelta
@@ -124,11 +129,30 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
 
         return value
 
+    def validate_password(self, value):
+        # Les quatre validateurs de AUTH_PASSWORD_VALIDATORS existent depuis le debut, mais
+        # ne s'appliquent QU'A `User.set_password` appele via un formulaire Django. DRF ne
+        # les declenche pas tout seul : sans cet appel, un mot de passe de quatre
+        # caracteres passait, et la regle des 8 d'A3 §9 BR-3 n'existait que dans l'ecran.
+        try:
+            validate_password(value)
+        except DjangoValidationError as erreur:
+            # `validate_password` leve la ValidationError de django.core.exceptions, PAS
+            # celle de DRF. Sans cette conversion, elle remonte en 500 au lieu d'un 400.
+            raise serializers.ValidationError(list(erreur.messages)) from erreur
+
+        return value
+
     def validate(self, attrs):
-        if attrs['password'] == attrs['password_confirm']:
-            return attrs
-        else:
-            raise serializers.ValidationError()
+        if attrs['password'] != attrs['password_confirm']:
+            # Un dictionnaire, pas une chaine : une chaine part dans `non_field_errors` et
+            # finirait en banniere, alors que l'erreur designe un champ precis. Le front
+            # sait deja afficher un message sous un champ.
+            raise serializers.ValidationError({
+                'password_confirm': "Les deux mots de passe ne correspondent pas."
+            })
+
+        return attrs
 
     def create(self, validated_data):
         password = validated_data.pop('password')
@@ -157,3 +181,27 @@ class LoginSerializer(serializers.Serializer):
         # If successful, add the user object to the validated data
         attrs['user'] = user 
         return attrs
+
+class TokenRefreshRobusteSerializer(TokenRefreshSerializer):
+    """Rafraichissement qui econduit un compte supprime au lieu de planter.
+
+    SimpleJWT va chercher l'utilisateur en base pour lui appliquer sa regle
+    d'authentification (`serializers.py` ligne 116 de la bibliotheque). Si le compte a ete
+    supprime entre-temps, le `get()` leve `CustomUser.DoesNotExist`, que personne ne
+    rattrape : Django la transforme en 500.
+
+    Un jeton qui traine apres une suppression de compte est un cas parfaitement normal. Il
+    doit produire un 401, pas une alerte serveur a 3h du matin.
+
+    Rattrape `ObjectDoesNotExist` plutot que `CustomUser.DoesNotExist` : c'est la classe
+    parente, et le jour ou AUTH_USER_MODEL change, ce code n'a pas a bouger.
+    """
+
+    def validate(self, attrs):
+        try:
+            return super().validate(attrs)
+        except ObjectDoesNotExist as erreur:
+            raise AuthenticationFailed(
+                "Aucun compte actif ne correspond a ce jeton.",
+                "no_active_account",
+            ) from erreur

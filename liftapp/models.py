@@ -1,3 +1,4 @@
+from django.core.validators import MinValueValidator
 from django.db import models
 import uuid
 from accounts.models import CustomUser
@@ -125,8 +126,15 @@ class Set(models.Model):
     workout_session = models.ForeignKey(WorkoutSession, on_delete=models.CASCADE, related_name='sets')
     exercise = models.ForeignKey(Exercise, on_delete=models.PROTECT)
     set_number = models.IntegerField()
-    weight_kg = models.DecimalField(max_digits=6, decimal_places=2)
-    reps = models.IntegerField()
+    # Borne a 0, pas a 1 : un exercice au poids du corps se logue legitimement a 0 kg, et
+    # une serie a 0 repetition est acceptee (decision produit). Ce qu'on refuse ici, c'est
+    # le NEGATIF, qui retirerait du volume au total hebdomadaire de l'accueil sans trace.
+    # C5 §9 BR-2 fait deja porter la verification au client, ce qui ne protege pas l'API :
+    # un appel direct en curl contournait tout.
+    weight_kg = models.DecimalField(
+        max_digits=6, decimal_places=2, validators=[MinValueValidator(0)]
+    )
+    reps = models.IntegerField(validators=[MinValueValidator(0)])
     rpe = models.IntegerField(null=True, blank=True)
     duration_seconds = models.IntegerField(null=True, blank=True)
     rest_seconds = models.IntegerField(null=True, blank=True)

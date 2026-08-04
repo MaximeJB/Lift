@@ -598,15 +598,9 @@ def test_deux_series_peuvent_porter_le_meme_numero(auth_client, user):
         assert reponse.status_code == 201
 
 
-@pytest.mark.xfail(
-    strict=True,
-    reason=(
-        "Le modele Set n'a AUCUN validateur : un poids negatif est accepte. C5 §9 BR-2 fait "
-        "porter la verification au client, ce qui ne protege pas l'API."
-    ),
-)
 @pytest.mark.django_db
 def test_un_poids_negatif_est_refuse(auth_client, user):
+    """Ferme le 03/08/2026 par un MinValueValidator(0) sur Set.weight_kg."""
     exercice = Exercise.objects.create(name='Bench Press', muscle_group='CHEST')
     seance = WorkoutSession.objects.create(user=user, title='Mienne', date='2026-08-03')
 
@@ -621,12 +615,15 @@ def test_un_poids_negatif_est_refuse(auth_client, user):
     assert reponse.status_code == 400
 
 
-@pytest.mark.xfail(
-    strict=True,
-    reason="Meme trou : zero repetition est accepte par l'API.",
-)
 @pytest.mark.django_db
-def test_zero_repetition_est_refuse(auth_client, user):
+def test_un_nombre_de_repetitions_negatif_est_refuse(auth_client, user):
+    """Reecrit le 03/08/2026.
+
+    Ce test s'appelait `test_zero_repetition_est_refuse` et attendait un 400 sur `reps=0`.
+    Il contredisait une decision produit deja prise — un 0 est accepte. Un test qui
+    contredit une decision est un piege pour dans six mois : c'est la decision qui prime,
+    donc le test change, pas la decision. Ce qu'on refuse vraiment, c'est le negatif.
+    """
     exercice = Exercise.objects.create(name='Bench Press', muscle_group='CHEST')
     seance = WorkoutSession.objects.create(user=user, title='Mienne', date='2026-08-03')
 
@@ -635,10 +632,27 @@ def test_zero_repetition_est_refuse(auth_client, user):
         'exercise': str(exercice.id),
         'set_number': 1,
         'weight_kg': 80,
-        'reps': 0,
+        'reps': -5,
     })
 
     assert reponse.status_code == 400
+
+
+@pytest.mark.django_db
+def test_zero_repetition_reste_accepte(auth_client, user):
+    """Le pendant du test precedent : la borne est a 0, elle ne doit pas mordre dessus."""
+    exercice = Exercise.objects.create(name='Bench Press', muscle_group='CHEST')
+    seance = WorkoutSession.objects.create(user=user, title='Mienne', date='2026-08-03')
+
+    reponse = auth_client.post('/api/lift/set/', {
+        'workout_session': str(seance.id),
+        'exercise': str(exercice.id),
+        'set_number': 1,
+        'weight_kg': 0,
+        'reps': 0,
+    })
+
+    assert reponse.status_code == 201
 
 
 @pytest.mark.django_db
