@@ -9,7 +9,7 @@ created: "2026-07-28T13:42:57.203Z"
 modified: "2026-08-03T08:46:52.056Z"
 completedAt: "2026-08-03T08:46:52.056Z"
 labels: []
-order: "aX"
+order: "a3"
 ---
 # 7. Créer l'écran RegisterScreen
 

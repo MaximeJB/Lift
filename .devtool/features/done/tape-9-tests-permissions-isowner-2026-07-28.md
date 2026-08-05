@@ -9,7 +9,7 @@ created: "2026-07-28T09:12:34.195Z"
 modified: "2026-07-28T19:11:56.701Z"
 completedAt: "2026-07-28T19:11:56.701Z"
 labels: []
-order: "a4"
+order: "ac"
 ---
 # Étape 9 — Tests permissions IsOwner
 

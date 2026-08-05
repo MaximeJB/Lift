@@ -25,3 +25,9 @@ C'est la tâche la plus lourde des quatre : elle suppose un service d'envoi d'em
 Cette carte etait dans `done/`, mais `accounts/urls.py` ne declare que `login/`, `token/refresh/`, `register/` et `me/`. L'endpoint n'existe pas.
 
 Le travail est redecoupe en taches plus fines, `f10` a `f16`. Cette carte reste ici comme trace de l'intention initiale — **suis les tickets `f`**.
+
+---
+
+## Retiree du kanban le 04/08/2026
+
+Remplacee par les cartes 06 et 07.

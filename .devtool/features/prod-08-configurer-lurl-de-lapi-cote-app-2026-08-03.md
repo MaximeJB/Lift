@@ -9,10 +9,9 @@ created: "2026-08-03T00:00:00.000Z"
 modified: "2026-08-03T00:00:00.000Z"
 completedAt: null
 labels: ["frontend", "production"]
-order: "f67"
+order: "aP"
 ---
-
-# Faire pointer l'app sur le bon serveur selon l'environnement
+# 26 — Faire pointer l'app sur le bon serveur selon l'environnement
 
 **Ce que ca prend** : l'URL de base actuellement dans `src/shared/api/client.ts`.
 **Ce que ca retourne** : une URL qui vient de la configuration, pas du code.

@@ -9,10 +9,9 @@ created: "2026-08-03T00:00:00.000Z"
 modified: "2026-08-03T00:00:00.000Z"
 completedAt: null
 labels: ["backend", "production", "securite"]
-order: "f62"
+order: "aJ"
 ---
-
-# Restreindre qui peut appeler l'API
+# 20 — Restreindre qui peut appeler l'API
 
 **Ce que ca prend** : `ALLOWED_HOSTS` et la configuration CORS.
 **Ce que ca retourne** : une API qui refuse les hotes et les origines non declares.

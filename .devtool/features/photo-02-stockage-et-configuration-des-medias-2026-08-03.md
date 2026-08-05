@@ -9,10 +9,9 @@ created: "2026-08-03T00:00:00.000Z"
 modified: "2026-08-03T00:00:00.000Z"
 completedAt: null
 labels: ["backend", "photo"]
-order: "f51"
+order: "ab"
 ---
-
-# Configurer ou vont les fichiers televerses
+# 38 — Configurer ou vont les fichiers televerses
 
 **Ce que ca prend** : `MEDIA_ROOT` et `MEDIA_URL` dans les reglages.
 **Ce que ca retourne** : des fichiers servis correctement en developpement.

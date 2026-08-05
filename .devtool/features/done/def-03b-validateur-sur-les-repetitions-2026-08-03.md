@@ -9,9 +9,8 @@ created: "2026-08-03T00:00:00.000Z"
 modified: "2026-08-03T00:00:00.000Z"
 completedAt: "2026-08-03T00:00:00.000Z"
 labels: ["backend", "bug"]
-order: "f03"
+order: "aH"
 ---
-
 # Refuser un nombre de repetitions negatif
 
 **Ce que ca prend** : le champ `Set.reps` dans `liftapp/models.py`.

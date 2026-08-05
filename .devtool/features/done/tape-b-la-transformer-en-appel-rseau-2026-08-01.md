@@ -9,7 +9,7 @@ created: "2026-08-01T16:14:21.363Z"
 modified: "2026-08-01T16:54:06.438Z"
 completedAt: "2026-08-01T16:54:06.438Z"
 labels: []
-order: "aG"
+order: "ad"
 ---
 # Étape B — La transformer en appel réseau
 

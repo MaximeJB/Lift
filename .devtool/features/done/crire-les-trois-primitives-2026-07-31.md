@@ -9,7 +9,7 @@ created: "2026-07-31T08:11:29.258Z"
 modified: "2026-08-01T09:42:53.781Z"
 completedAt: "2026-08-01T09:42:53.781Z"
 labels: []
-order: "aC"
+order: "aE"
 ---
 # Écrire les trois primitives
 

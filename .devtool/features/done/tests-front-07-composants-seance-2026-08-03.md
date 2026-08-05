@@ -9,7 +9,7 @@ created: "2026-08-03T00:00:00.000Z"
 modified: "2026-08-03T00:00:00.000Z"
 completedAt: "2026-08-03T00:00:00.000Z"
 labels: ["tests", "frontend"]
-order: "e07"
+order: "b02"
 ---
 # Tests 07 — SetRow, SetInputForm, RestTimerWidget
 

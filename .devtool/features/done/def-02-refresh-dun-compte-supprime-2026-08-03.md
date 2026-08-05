@@ -9,9 +9,8 @@ created: "2026-08-03T00:00:00.000Z"
 modified: "2026-08-03T00:00:00.000Z"
 completedAt: "2026-08-03T00:00:00.000Z"
 labels: ["backend", "securite", "bug"]
-order: "f01"
+order: "aF"
 ---
-
 # Un jeton de rafraichissement dont le compte a ete supprime doit renvoyer 401, pas 500
 
 **Ce que ca prend** : un POST sur `/api/auth/token/refresh/` avec un refresh valide dont

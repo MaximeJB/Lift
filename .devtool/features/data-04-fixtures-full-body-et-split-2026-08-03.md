@@ -9,10 +9,9 @@ created: "2026-08-03T00:00:00.000Z"
 modified: "2026-08-03T00:00:00.000Z"
 completedAt: null
 labels: ["backend", "data"]
-order: "f23"
+order: "aB"
 ---
-
-# Ajouter les deux autres programmes a la commande de seeding
+# 12 — Ajouter les deux autres programmes a la commande de seeding
 
 **Ce que ca prend** : la commande de `data-03`, et le tableau de `data-02`.
 **Ce que ca retourne** : les trois programmes complets en base.

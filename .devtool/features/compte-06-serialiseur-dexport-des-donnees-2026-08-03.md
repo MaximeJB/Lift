@@ -9,10 +9,9 @@ created: "2026-08-03T00:00:00.000Z"
 modified: "2026-08-03T00:00:00.000Z"
 completedAt: null
 labels: ["backend", "compte", "rgpd"]
-order: "f15"
+order: "a5"
 ---
-
-# Assembler l'export des donnees personnelles
+# 06 — Assembler l'export des donnees personnelles
 
 **Ce que ca prend** : un utilisateur.
 **Ce que ca retourne** : un dictionnaire Python contenant son profil, ses seances et ses

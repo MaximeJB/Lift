@@ -9,10 +9,9 @@ created: "2026-08-03T00:00:00.000Z"
 modified: "2026-08-03T00:00:00.000Z"
 completedAt: null
 labels: ["backend", "securite"]
-order: "f74"
+order: "aK"
 ---
-
-# Empecher qu'on essaie mille mots de passe a la minute
+# 21 — Empecher qu'on essaie mille mots de passe a la minute
 
 **Ce que ca prend** : les routes `/api/auth/login/` et `/api/auth/register/`.
 **Ce que ca retourne** : un 429 au-dela d'un certain nombre de tentatives.

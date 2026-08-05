@@ -9,7 +9,7 @@ created: "2026-07-28T09:13:09.135Z"
 modified: "2026-08-01T09:42:53.538Z"
 completedAt: "2026-08-01T09:42:53.538Z"
 labels: []
-order: "a7"
+order: "aU"
 ---
 # 1.Initialiser le projet Expo
 

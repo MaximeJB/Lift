@@ -9,7 +9,7 @@ created: "2026-08-02T00:00:00.000Z"
 modified: "2026-08-04T12:31:22.006Z"
 completedAt: "2026-08-04T12:31:22.006Z"
 labels: ["demain", "test", "c3"]
-order: "a000G"
+order: "am"
 ---
 # À TESTER — Le segment Séances (C3)
 

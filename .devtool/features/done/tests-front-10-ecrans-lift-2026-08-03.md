@@ -9,7 +9,7 @@ created: "2026-08-03T00:00:00.000Z"
 modified: "2026-08-03T00:00:00.000Z"
 completedAt: "2026-08-03T00:00:00.000Z"
 labels: ["tests", "frontend"]
-order: "e10"
+order: "b05"
 ---
 # Tests 10 — ecrans B1, C1, C2, C5, C6, C7, C8
 

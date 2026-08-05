@@ -9,10 +9,9 @@ created: "2026-08-03T00:00:00.000Z"
 modified: "2026-08-03T00:00:00.000Z"
 completedAt: null
 labels: ["backend", "tests", "compte"]
-order: "f12"
+order: "a2"
 ---
-
-# Couvrir le changement de mot de passe par des tests
+# 03 — Couvrir le changement de mot de passe par des tests
 
 **Ce que ca prend** : la route de `compte-02`.
 **Ce que ca retourne** : environ huit tests dans `accounts/tests.py`.

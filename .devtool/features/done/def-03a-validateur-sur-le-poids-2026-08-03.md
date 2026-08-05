@@ -9,9 +9,8 @@ created: "2026-08-03T00:00:00.000Z"
 modified: "2026-08-03T00:00:00.000Z"
 completedAt: "2026-08-03T00:00:00.000Z"
 labels: ["backend", "bug"]
-order: "f02"
+order: "aG"
 ---
-
 # Refuser un poids negatif au niveau du modele
 
 **Ce que ca prend** : le champ `Set.weight_kg` dans `liftapp/models.py`.

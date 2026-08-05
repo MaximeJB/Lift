@@ -9,9 +9,9 @@ created: "2026-08-03T00:00:00.000Z"
 modified: "2026-08-03T00:00:00.000Z"
 completedAt: null
 labels: ["tests", "e2e"]
-order: "e12"
+order: "ai"
 ---
-# E2E 12 — trancher l'outillage, et sa contrainte de plateforme
+# 45 — E2E 12 — trancher l'outillage, et sa contrainte de plateforme
 
 **Objectif** : decider AVANT d'ecrire un seul parcours, parce que la contrainte est dure.
 

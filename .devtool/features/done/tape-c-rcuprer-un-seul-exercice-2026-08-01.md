@@ -9,7 +9,7 @@ created: "2026-08-01T16:14:34.945Z"
 modified: "2026-08-01T16:54:06.460Z"
 completedAt: "2026-08-01T16:54:06.460Z"
 labels: []
-order: "aH"
+order: "ae"
 ---
 # Étape C — Récupérer un seul exercice
 

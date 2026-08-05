@@ -25,3 +25,9 @@ La vraie question n'est pas la vue, c'est le `on_delete` des relations : regarde
 Cette carte etait dans `done/`, mais `accounts/urls.py` ne declare que `login/`, `token/refresh/`, `register/` et `me/`. L'endpoint n'existe pas.
 
 Le travail est redecoupe en taches plus fines, `f10` a `f16`. Cette carte reste ici comme trace de l'intention initiale — **suis les tickets `f`**.
+
+---
+
+## Retiree du kanban le 04/08/2026
+
+Remplacee par les cartes 04 et 05.

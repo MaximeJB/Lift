@@ -9,10 +9,9 @@ created: "2026-08-03T00:00:00.000Z"
 modified: "2026-08-03T00:00:00.000Z"
 completedAt: null
 labels: ["backend", "photo"]
-order: "f50"
+order: "aa"
 ---
-
-# Ajouter le modele qui stocke une photo de seance
+# 37 — Ajouter le modele qui stocke une photo de seance
 
 **Ce que ca prend** : une seance et un fichier image.
 **Ce que ca retourne** : une table `SessionPhoto` et sa migration.

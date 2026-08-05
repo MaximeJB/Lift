@@ -9,10 +9,9 @@ created: "2026-08-03T00:00:00.000Z"
 modified: "2026-08-03T00:00:00.000Z"
 completedAt: null
 labels: ["frontend", "design"]
-order: "f40"
+order: "aW"
 ---
-
-# Decider du format des 18 icones de groupe musculaire
+# 33 — Decider du format des 18 icones de groupe musculaire
 
 **Ce que ca prend** : la liste des 18 valeurs de `muscle_group` cote Django.
 **Ce que ca retourne** : une decision ecrite sur le format, et un inventaire de ce qu'il

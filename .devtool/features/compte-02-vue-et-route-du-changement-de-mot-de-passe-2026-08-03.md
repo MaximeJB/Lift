@@ -1,18 +1,17 @@
 ---
 id: "compte-02-vue-et-route-du-changement-de-mot-de-passe-2026-08-03"
-status: "todo"
+status: "done today"
 priority: "high"
 assignee: null
 epic: null
 dueDate: null
 created: "2026-08-03T00:00:00.000Z"
-modified: "2026-08-03T00:00:00.000Z"
+modified: "2026-08-05T14:41:03.274Z"
 completedAt: null
 labels: ["backend", "compte"]
-order: "f11"
+order: "a1"
 ---
-
-# Brancher POST /api/auth/change-password/
+# 02 — Brancher POST /api/auth/change-password/
 
 **Ce que ca prend** : le serialiseur du ticket `compte-01`.
 **Ce que ca retourne** : un 200 vide quand le changement passe, un 400 detaille sinon.

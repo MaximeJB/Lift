@@ -9,7 +9,7 @@ created: "2026-08-02T00:00:00.000Z"
 modified: "2026-08-04T12:31:20.586Z"
 completedAt: "2026-08-04T12:31:20.586Z"
 labels: ["demain", "test", "c2"]
-order: "a000V"
+order: "al"
 ---
 # À TESTER — Le détail d'un exercice (C2)
 

@@ -9,10 +9,9 @@ created: "2026-08-03T00:00:00.000Z"
 modified: "2026-08-03T00:00:00.000Z"
 completedAt: null
 labels: ["backend", "photo"]
-order: "f52"
+order: "ac"
 ---
-
-# POST d'une photo sur une seance
+# 39 — POST d'une photo sur une seance
 
 **Ce que ca prend** : un fichier image en `multipart/form-data`, et l'id d'une seance.
 **Ce que ca retourne** : un 201 avec l'URL de la photo.

@@ -9,7 +9,7 @@ created: "2026-08-03T00:00:00.000Z"
 modified: "2026-08-03T00:00:00.000Z"
 completedAt: "2026-08-03T00:00:00.000Z"
 labels: ["tests", "frontend"]
-order: "e06"
+order: "b01"
 ---
 # Tests 06 — Input, PasswordInput, SearchInput, Checkbox
 

@@ -9,10 +9,9 @@ created: "2026-08-03T00:00:00.000Z"
 modified: "2026-08-03T00:00:00.000Z"
 completedAt: null
 labels: ["frontend", "photo"]
-order: "f54"
+order: "ae"
 ---
-
-# Montrer les photos dans le detail d'une seance passee
+# 41 — Montrer les photos dans le detail d'une seance passee
 
 **Ce que ca prend** : les photos renvoyees avec la seance.
 **Ce que ca retourne** : C8 avec ses images.

@@ -9,10 +9,9 @@ created: "2026-08-03T00:00:00.000Z"
 modified: "2026-08-03T00:00:00.000Z"
 completedAt: null
 labels: ["backend", "tests", "data"]
-order: "f24"
+order: "aC"
 ---
-
-# Verrouiller la commande de seeding par des tests
+# 13 — Verrouiller la commande de seeding par des tests
 
 **Ce que ca prend** : la commande `seed_templates` des tickets `data-03` et `data-04`.
 **Ce que ca retourne** : six tests dans `liftapp/tests.py`.

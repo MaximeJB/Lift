@@ -9,10 +9,9 @@ created: "2026-08-03T00:00:00.000Z"
 modified: "2026-08-03T00:00:00.000Z"
 completedAt: null
 labels: ["backend", "data"]
-order: "f22"
+order: "aA"
 ---
-
-# Semer le premier template : Push / Pull / Legs
+# 11 — Semer le premier template : Push / Pull / Legs
 
 **Ce que ca prend** : le tableau valide de `data-02`.
 **Ce que ca retourne** : trois `WorkoutTemplate` en base, avec leurs `TemplateExercise`

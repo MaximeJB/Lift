@@ -9,7 +9,7 @@ created: "2026-08-03T00:00:00.000Z"
 modified: "2026-08-03T00:00:00.000Z"
 completedAt: "2026-08-03T00:00:00.000Z"
 labels: ["tests", "frontend"]
-order: "e01"
+order: "aw"
 ---
 # Tests 01 — les quatre services API
 

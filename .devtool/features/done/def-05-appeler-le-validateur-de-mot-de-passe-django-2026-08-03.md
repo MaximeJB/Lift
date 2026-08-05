@@ -9,9 +9,8 @@ created: "2026-08-03T00:00:00.000Z"
 modified: "2026-08-03T00:00:00.000Z"
 completedAt: "2026-08-03T00:00:00.000Z"
 labels: ["backend", "securite"]
-order: "f06"
+order: "aK"
 ---
-
 # Faire tourner les regles de mot de passe de Django a l'inscription
 
 **Ce que ca prend** : le champ `password` de `UserRegistrationSerializer`.

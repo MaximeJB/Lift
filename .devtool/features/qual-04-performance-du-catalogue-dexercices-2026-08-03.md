@@ -9,10 +9,9 @@ created: "2026-08-03T00:00:00.000Z"
 modified: "2026-08-03T00:00:00.000Z"
 completedAt: null
 labels: ["backend", "performance"]
-order: "f73"
+order: "aU"
 ---
-
-# Verifier que le catalogue ne fait pas 800 requetes SQL
+# 31 — Verifier que le catalogue ne fait pas 800 requetes SQL
 
 **Ce que ca prend** : l'endpoint qui liste les exercices.
 **Ce que ca retourne** : un nombre de requetes constant, quelle que soit la taille de la

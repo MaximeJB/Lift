@@ -9,7 +9,7 @@ created: "2026-08-02T00:00:00.000Z"
 modified: "2026-08-04T12:31:21.162Z"
 completedAt: "2026-08-04T12:31:21.162Z"
 labels: ["demain", "test", "c6"]
-order: "a000V"
+order: "ap"
 ---
 # À TESTER — La finalisation d'une séance (C6)
 

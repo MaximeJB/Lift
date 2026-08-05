@@ -9,10 +9,9 @@ created: "2026-08-03T00:00:00.000Z"
 modified: "2026-08-03T00:00:00.000Z"
 completedAt: null
 labels: ["backend", "compte", "rgpd"]
-order: "f16"
+order: "a6"
 ---
-
-# GET /api/auth/me/export/ — livrer l'export
+# 07 — GET /api/auth/me/export/ — livrer l'export
 
 **Ce que ca prend** : le serialiseur de `compte-06`.
 **Ce que ca retourne** : un JSON, et une decision sur la facon de le livrer.

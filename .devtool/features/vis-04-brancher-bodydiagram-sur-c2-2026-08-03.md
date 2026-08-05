@@ -9,10 +9,9 @@ created: "2026-08-03T00:00:00.000Z"
 modified: "2026-08-03T00:00:00.000Z"
 completedAt: null
 labels: ["frontend", "design"]
-order: "f43"
+order: "aZ"
 ---
-
-# Afficher le schema corporel dans le detail d'un exercice
+# 36 — Afficher le schema corporel dans le detail d'un exercice
 
 **Ce que ca prend** : le composant de `vis-03`, et les groupes musculaires deja renvoyes
 par l'API.

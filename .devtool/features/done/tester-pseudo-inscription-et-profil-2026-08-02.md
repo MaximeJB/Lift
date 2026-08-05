@@ -9,7 +9,7 @@ created: "2026-08-02T00:00:00.000Z"
 modified: "2026-08-04T12:31:13.776Z"
 completedAt: "2026-08-04T12:31:13.776Z"
 labels: ["demain", "test", "a3", "d1"]
-order: "a00V"
+order: "as"
 ---
 # À TESTER — Le pseudo, à l'inscription et au profil
 

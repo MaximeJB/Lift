@@ -9,10 +9,9 @@ created: "2026-08-03T00:00:00.000Z"
 modified: "2026-08-03T00:00:00.000Z"
 completedAt: null
 labels: ["backend", "production"]
-order: "f60"
+order: "aH"
 ---
-
-# Separer les reglages de developpement et de production
+# 18 — Separer les reglages de developpement et de production
 
 **Ce que ca prend** : le fichier `Lift/settings.py` actuel, unique.
 **Ce que ca retourne** : trois fichiers — `base.py`, `dev.py`, `prod.py` — et un projet qui

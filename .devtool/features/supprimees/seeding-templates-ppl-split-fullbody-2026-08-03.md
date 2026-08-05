@@ -60,3 +60,9 @@ qu'un programme qui prescrit le mauvais mouvement.
 - https://www.muscleandstrength.com/workouts/3-day-PPL-workout-for-beginners
 - https://www.muscleandstrength.com/workouts/3-day-workout-routine-and-diet-for-beginners
 - https://www.hevyapp.com/push-pull-legs-ultimate-guide/
+
+---
+
+## Retiree du kanban le 04/08/2026
+
+Remplacee par les cartes 10 a 13, qui decoupent le seeding en normalisation, correspondance, ecriture et tests.

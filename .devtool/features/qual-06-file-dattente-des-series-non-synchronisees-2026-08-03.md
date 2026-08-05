@@ -9,10 +9,9 @@ created: "2026-08-03T00:00:00.000Z"
 modified: "2026-08-03T00:00:00.000Z"
 completedAt: null
 labels: ["frontend", "offline"]
-order: "f75"
+order: "aV"
 ---
-
-# Ne pas perdre les series quand l'app se ferme hors ligne
+# 32 — Ne pas perdre les series quand l'app se ferme hors ligne
 
 **Ce que ca prend** : les series marquees `NON SYNC` dans l'ecran C5.
 **Ce que ca retourne** : ces memes series, toujours la apres un redemarrage de l'app.

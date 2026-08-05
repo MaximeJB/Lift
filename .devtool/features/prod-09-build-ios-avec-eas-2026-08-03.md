@@ -9,10 +9,9 @@ created: "2026-08-03T00:00:00.000Z"
 modified: "2026-08-03T00:00:00.000Z"
 completedAt: null
 labels: ["frontend", "production"]
-order: "f68"
+order: "aQ"
 ---
-
-# Produire un build installable sur iPhone
+# 27 — Produire un build installable sur iPhone
 
 **Ce que ca prend** : le projet Expo et un compte Apple Developer.
 **Ce que ca retourne** : un build distribuable en TestFlight.

@@ -9,7 +9,7 @@ created: "2026-08-02T00:00:00.000Z"
 modified: "2026-08-04T07:20:03.956Z"
 completedAt: "2026-08-04T07:20:03.956Z"
 labels: ["apres-mvp", "backend", "etl"]
-order: "a08"
+order: "aB"
 ---
 # Compléter `exercise_type` dans le pipeline ETL
 
@@ -63,3 +63,10 @@ python -c "import sqlite3; c=sqlite3.connect('db.sqlite3'); print(list(c.execute
 ```
 
 Cible : zéro ligne à `exercise_type` vide, et aucune valeur hors des six choix.
+---
+
+## Archivage errone, constate le 04/08/2026
+
+Cette carte etait dans `done/` alors que le code ne la porte pas. 86 exercices sur 873 portent un `exercise_type`. Le travail est repris par la carte 42.
+
+Elle reste ici comme trace de l'intention initiale.

@@ -1,5 +1,5 @@
 from accounts.models import CustomUser
-from accounts.serializers import LoginSerializer, PrivateUserSerializer, UserRegistrationSerializer
+from accounts.serializers import LoginSerializer, PrivateUserSerializer, UserRegistrationSerializer, PasswordChangeSerializer
 from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
@@ -60,3 +60,12 @@ class UserProfileView(generics.RetrieveUpdateAPIView):
         return self.request.user
     
     
+class PasswordChangeView(APIView):
+    permission_classes = [IsAuthenticated]
+    def post(self, request):
+        ser = PasswordChangeSerializer(data=request.data, context={'request':request})
+        ser.is_valid(raise_exception=True)
+        user = request.user
+        user.set_password(ser.validated_data['new_password'])
+        user.save
+        return Response({"message": "Mot de passe changé"})      

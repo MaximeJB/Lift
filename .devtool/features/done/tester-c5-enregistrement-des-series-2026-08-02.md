@@ -9,7 +9,7 @@ created: "2026-08-02T00:00:00.000Z"
 modified: "2026-08-04T07:20:02.480Z"
 completedAt: "2026-08-04T07:20:02.481Z"
 labels: ["demain", "test", "c5"]
-order: "a0V"
+order: "ao"
 ---
 # DEMAIN — Tester C5 : enregistrement des séries et bandeau de repos
 

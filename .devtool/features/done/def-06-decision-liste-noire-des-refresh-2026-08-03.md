@@ -9,9 +9,8 @@ created: "2026-08-03T00:00:00.000Z"
 modified: "2026-08-03T00:00:00.000Z"
 completedAt: "2026-08-03T00:00:00.000Z"
 labels: ["backend", "securite", "decision"]
-order: "f07"
+order: "aL"
 ---
-
 # Decider si un ancien refresh token doit mourir apres rotation
 
 **Ce que ca prend** : une decision de ta part, puis eventuellement une app et une migration.

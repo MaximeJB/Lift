@@ -9,7 +9,7 @@ created: "2026-07-28T09:07:11.834Z"
 modified: "2026-07-28T19:11:54.218Z"
 completedAt: "2026-07-28T19:11:54.218Z"
 labels: []
-order: "a3"
+order: "ab"
 ---
 # Étape 8 — Tests API sessions et sets
 

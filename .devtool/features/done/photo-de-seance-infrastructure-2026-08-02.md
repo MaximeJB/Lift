@@ -9,7 +9,7 @@ created: "2026-08-02T00:00:00.000Z"
 modified: "2026-08-04T07:20:05.664Z"
 completedAt: "2026-08-04T07:20:05.664Z"
 labels: ["backend", "infrastructure", "c6"]
-order: "a02"
+order: "aQ"
 ---
 # La photo de séance — trois briques manquantes
 
@@ -41,3 +41,10 @@ Côté frontend, `expo-image-picker` n'est pas installé non plus.
 L'écran C6 est complet sans elle — titre, relevé, records, notes, enregistrement et
 suppression fonctionnent. La section photo est simplement absente, aucun bouton inerte
 n'est affiché.
+---
+
+## Archivage errone, constate le 04/08/2026
+
+Cette carte etait dans `done/` alors que le code ne la porte pas. `liftapp/models.py` ne contient aucun modele de photo. Le travail est repris par les cartes 37 a 41.
+
+Elle reste ici comme trace de l'intention initiale.

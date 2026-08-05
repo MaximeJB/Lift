@@ -9,7 +9,7 @@ created: "2026-07-28T09:11:52.190Z"
 modified: "2026-07-28T09:11:52.190Z"
 completedAt: "2026-07-28T09:11:52.190Z"
 labels: []
-order: "a1"
+order: "aY"
 ---
 # Étape 5 — Tests API auth
 

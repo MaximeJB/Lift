@@ -9,7 +9,7 @@ created: "2026-07-28T13:43:23.882Z"
 modified: "2026-08-02T10:00:54.604Z"
 completedAt: "2026-08-02T10:00:54.604Z"
 labels: []
-order: "aQ"
+order: "a4"
 ---
 # 4. Créer un service API centralisé
 

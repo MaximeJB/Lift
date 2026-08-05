@@ -9,10 +9,9 @@ created: "2026-08-03T00:00:00.000Z"
 modified: "2026-08-03T00:00:00.000Z"
 completedAt: null
 labels: ["data"]
-order: "f21"
+order: "a9"
 ---
-
-# Etablir la liste des exercices des trois programmes, et la confronter a la base
+# 10 — Etablir la liste des exercices des trois programmes, et la confronter a la base
 
 **Ce que ca prend** : les noms d'exercices deja recherches, notes dans le ticket
 `seeding-templates-ppl-split-fullbody`.

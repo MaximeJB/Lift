@@ -9,10 +9,9 @@ created: "2026-08-03T00:00:00.000Z"
 modified: "2026-08-03T00:00:00.000Z"
 completedAt: null
 labels: ["frontend", "photo"]
-order: "f53"
+order: "ad"
 ---
-
-# Prendre ou choisir une photo depuis l'app
+# 40 — Prendre ou choisir une photo depuis l'app
 
 **Ce que ca prend** : une action de l'utilisateur sur l'ecran de finalisation.
 **Ce que ca retourne** : un fichier envoye a l'API.

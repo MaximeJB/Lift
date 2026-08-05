@@ -9,10 +9,9 @@ created: "2026-08-03T00:00:00.000Z"
 modified: "2026-08-03T00:00:00.000Z"
 completedAt: null
 labels: ["backend", "production", "securite"]
-order: "f61"
+order: "aI"
 ---
-
-# Lire la cle secrete et les identifiants depuis l'environnement
+# 19 — Lire la cle secrete et les identifiants depuis l'environnement
 
 **Ce que ca prend** : les valeurs actuellement ecrites en dur dans les reglages.
 **Ce que ca retourne** : un fichier `.env` non versionne, et des reglages qui le lisent.

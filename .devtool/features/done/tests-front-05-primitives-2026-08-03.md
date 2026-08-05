@@ -9,7 +9,7 @@ created: "2026-08-03T00:00:00.000Z"
 modified: "2026-08-03T00:00:00.000Z"
 completedAt: "2026-08-03T00:00:00.000Z"
 labels: ["tests", "frontend"]
-order: "e05"
+order: "b00"
 ---
 # Tests 05 — les trois primitives
 

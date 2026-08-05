@@ -9,10 +9,9 @@ created: "2026-08-03T00:00:00.000Z"
 modified: "2026-08-03T00:00:00.000Z"
 completedAt: null
 labels: ["production", "decision"]
-order: "f65"
+order: "aN"
 ---
-
-# Decider ou tourne le backend
+# 24 — Decider ou tourne le backend
 
 **Ce que ca prend** : une comparaison.
 **Ce que ca retourne** : un choix ecrit, avec son cout mensuel et ses limites.

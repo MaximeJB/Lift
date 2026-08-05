@@ -9,10 +9,9 @@ created: "2026-08-03T00:00:00.000Z"
 modified: "2026-08-03T00:00:00.000Z"
 completedAt: null
 labels: ["frontend", "design"]
-order: "f41"
+order: "aX"
 ---
-
-# Creer le composant qui affiche l'icone d'un groupe musculaire
+# 34 — Creer le composant qui affiche l'icone d'un groupe musculaire
 
 **Ce que ca prend** : une valeur de `muscle_group`, par exemple `"CHEST"`.
 **Ce que ca retourne** : le composant graphique correspondant, a la taille demandee.

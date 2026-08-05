@@ -9,9 +9,9 @@ created: "2026-08-03T00:00:00.000Z"
 modified: "2026-08-03T00:00:00.000Z"
 completedAt: null
 labels: ["design", "atelier", "c5"]
-order: "d1"
+order: "ag"
 ---
-# Atelier — la clarté du parcours en séance (C5)
+# 43 — Atelier — la clarté du parcours en séance (C5)
 
 **Objectif** : qu'un utilisateur qui ouvre C5 comprenne du premier coup d'œil qu'il est
 sur le récapitulatif de sa séance, et non sur un écran de sélection d'exercice.

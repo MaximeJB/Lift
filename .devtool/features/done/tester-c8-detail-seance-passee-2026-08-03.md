@@ -9,7 +9,7 @@ created: "2026-08-03T00:00:00.000Z"
 modified: "2026-08-04T12:31:19.937Z"
 completedAt: "2026-08-04T12:31:19.937Z"
 labels: ["test", "c8"]
-order: "a001"
+order: "ar"
 ---
 # À TESTER — Le détail d'une séance passée (C8)
 

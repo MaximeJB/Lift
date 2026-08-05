@@ -9,9 +9,9 @@ created: "2026-08-03T00:00:00.000Z"
 modified: "2026-08-03T00:00:00.000Z"
 completedAt: null
 labels: ["tests", "e2e"]
-order: "e15"
+order: "al"
 ---
-# E2E 15 — catalogue, historique et corrections
+# 48 — E2E 15 — catalogue, historique et corrections
 
 **Objectif** : les parcours de consultation et de correction.
 

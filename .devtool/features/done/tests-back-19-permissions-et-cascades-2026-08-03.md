@@ -9,7 +9,7 @@ created: "2026-08-03T00:00:00.000Z"
 modified: "2026-08-03T00:00:00.000Z"
 completedAt: "2026-08-03T00:00:00.000Z"
 labels: ["tests", "backend"]
-order: "e19"
+order: "au"
 ---
 # Tests back 19 — permissions, cascades et validations
 

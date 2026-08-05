@@ -9,7 +9,7 @@ created: "2026-08-02T00:00:00.000Z"
 modified: "2026-08-04T07:20:04.594Z"
 completedAt: "2026-08-04T07:20:04.594Z"
 labels: ["avant-mvp", "bloquant-mvp", "design"]
-order: "a04"
+order: "b08"
 ---
 # À REVOIR AVANT LE MVP — Les visuels du catalogue d'exercices
 

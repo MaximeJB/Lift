@@ -9,10 +9,9 @@ created: "2026-08-03T00:00:00.000Z"
 modified: "2026-08-03T00:00:00.000Z"
 completedAt: null
 labels: ["backend", "production"]
-order: "f72"
+order: "aT"
 ---
-
-# Savoir ce qui casse en production
+# 30 — Savoir ce qui casse en production
 
 **Ce que ca prend** : la configuration `LOGGING` de Django.
 **Ce que ca retourne** : des logs exploitables, et une alerte quand une erreur survient.

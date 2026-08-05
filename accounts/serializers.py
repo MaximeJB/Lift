@@ -1,5 +1,7 @@
+from xml.dom import ValidationErr
+
 from rest_framework import serializers
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, check_password
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.exceptions import ValidationError as DjangoValidationError
@@ -205,3 +207,16 @@ class TokenRefreshRobusteSerializer(TokenRefreshSerializer):
                 "Aucun compte actif ne correspond a ce jeton.",
                 "no_active_account",
             ) from erreur
+
+class PasswordChangeSerializer(serializers.Serializer):
+    old_password = serializers.CharField(write_only=True, required=True)
+    password = serializers.CharField(write_only=True, required=True)
+    password_confirm = serializers.CharField(write_only=True)
+    
+    def validate_old_password(self, attrs):
+        user = self.context['request'].user 
+            
+        if not user.check_password(attrs):
+                raise serializers.ValidationError("l'ancien mot de passe ne correspond pas")
+        return attrs
+        

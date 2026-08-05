@@ -9,10 +9,9 @@ created: "2026-08-03T00:00:00.000Z"
 modified: "2026-08-03T00:00:00.000Z"
 completedAt: null
 labels: ["frontend", "design"]
-order: "f42"
+order: "aY"
 ---
-
-# Dessiner le schema corporel, sans encore le brancher
+# 35 — Dessiner le schema corporel, sans encore le brancher
 
 **Ce que ca prend** : rien, sinon une silhouette.
 **Ce que ca retourne** : un composant `BodyDiagram` qui affiche un corps de face et de dos,

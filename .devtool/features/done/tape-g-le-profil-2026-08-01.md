@@ -9,7 +9,7 @@ created: "2026-08-01T16:15:25.845Z"
 modified: "2026-08-01T16:54:06.546Z"
 completedAt: "2026-08-01T16:54:06.546Z"
 labels: []
-order: "aL"
+order: "ai"
 ---
 # Étape G — Le profil
 

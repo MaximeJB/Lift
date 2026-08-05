@@ -9,7 +9,7 @@ created: "2026-07-28T13:42:08.606Z"
 modified: "2026-08-02T10:00:54.583Z"
 completedAt: "2026-08-02T10:00:54.583Z"
 labels: []
-order: "aP"
+order: "a2"
 ---
 # 3. Créer l'AuthContext
 

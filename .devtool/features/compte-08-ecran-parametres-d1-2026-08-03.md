@@ -9,10 +9,9 @@ created: "2026-08-03T00:00:00.000Z"
 modified: "2026-08-03T00:00:00.000Z"
 completedAt: null
 labels: ["frontend", "compte"]
-order: "f17"
+order: "a7"
 ---
-
-# Ajouter l'ecran Parametres, accessible depuis D1
+# 08 — Ajouter l'ecran Parametres, accessible depuis D1
 
 **Ce que ca prend** : les trois routes des tickets `compte-02`, `compte-04` et `compte-07`.
 **Ce que ca retourne** : un ecran qui regroupe changement de mot de passe, export, CGU et

@@ -9,10 +9,9 @@ created: "2026-08-03T00:00:00.000Z"
 modified: "2026-08-03T00:00:00.000Z"
 completedAt: null
 labels: ["backend", "tests"]
-order: "f70"
+order: "aR"
 ---
-
-# Poser un cliquet de couverture sur le backend aussi
+# 28 — Poser un cliquet de couverture sur le backend aussi
 
 **Ce que ca prend** : `pytest-cov`, deja installe.
 **Ce que ca retourne** : une commande qui echoue si la couverture backend redescend.

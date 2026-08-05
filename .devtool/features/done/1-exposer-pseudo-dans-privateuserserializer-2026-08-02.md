@@ -9,7 +9,7 @@ created: "2026-08-02T10:01:27.655Z"
 modified: "2026-08-03T08:46:52.008Z"
 completedAt: "2026-08-03T08:46:52.008Z"
 labels: []
-order: "aV"
+order: "a0"
 ---
 # 1. Exposer pseudo dans PrivateUserSerializer
 

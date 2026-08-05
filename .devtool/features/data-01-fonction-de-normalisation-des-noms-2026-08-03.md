@@ -9,10 +9,9 @@ created: "2026-08-03T00:00:00.000Z"
 modified: "2026-08-03T00:00:00.000Z"
 completedAt: null
 labels: ["backend", "data"]
-order: "f20"
+order: "a8"
 ---
-
-# Extraire la normalisation des noms d'exercices dans une fonction testee
+# 09 — Extraire la normalisation des noms d'exercices dans une fonction testee
 
 **Ce que ca prend** : une chaine, par exemple `"Bench Press (Barbell)"`.
 **Ce que ca retourne** : sa forme normalisee, par exemple `"bench press barbell"`.

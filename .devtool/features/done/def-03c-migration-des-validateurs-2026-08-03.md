@@ -9,9 +9,8 @@ created: "2026-08-03T00:00:00.000Z"
 modified: "2026-08-03T00:00:00.000Z"
 completedAt: "2026-08-03T00:00:00.000Z"
 labels: ["backend"]
-order: "f04"
+order: "aI"
 ---
-
 # Generer et appliquer la migration des deux validateurs
 
 **Ce que ca prend** : les modifications de `def-03a` et `def-03b`.

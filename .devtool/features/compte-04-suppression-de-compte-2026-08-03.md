@@ -9,10 +9,9 @@ created: "2026-08-03T00:00:00.000Z"
 modified: "2026-08-03T00:00:00.000Z"
 completedAt: null
 labels: ["backend", "compte", "rgpd"]
-order: "f13"
+order: "a3"
 ---
-
-# DELETE /api/auth/me/ — permettre a quelqu'un de supprimer son compte
+# 04 — DELETE /api/auth/me/ — permettre a quelqu'un de supprimer son compte
 
 **Ce que ca prend** : une requete DELETE authentifiee sur `/api/auth/me/`.
 **Ce que ca retourne** : un 204, et plus aucune trace de l'utilisateur ni de ses seances.

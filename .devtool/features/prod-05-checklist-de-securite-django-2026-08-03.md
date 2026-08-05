@@ -9,10 +9,9 @@ created: "2026-08-03T00:00:00.000Z"
 modified: "2026-08-03T00:00:00.000Z"
 completedAt: null
 labels: ["backend", "production", "securite"]
-order: "f64"
+order: "aM"
 ---
-
-# Faire passer `manage.py check --deploy` sans avertissement
+# 23 — Faire passer `manage.py check --deploy` sans avertissement
 
 **Ce que ca prend** : les reglages de production.
 **Ce que ca retourne** : une commande qui ne signale plus rien, et une decision ecrite pour

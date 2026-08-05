@@ -9,10 +9,9 @@ created: "2026-08-03T00:00:00.000Z"
 modified: "2026-08-03T00:00:00.000Z"
 completedAt: null
 labels: ["outillage"]
-order: "f71"
+order: "aS"
 ---
-
-# Faire tourner les tests automatiquement a chaque push
+# 29 — Faire tourner les tests automatiquement a chaque push
 
 **Ce que ca prend** : un fichier dans `.github/workflows/`.
 **Ce que ca retourne** : une coche verte ou rouge sur chaque commit.

@@ -9,10 +9,9 @@ created: "2026-08-03T00:00:00.000Z"
 modified: "2026-08-03T00:00:00.000Z"
 completedAt: null
 labels: ["backend", "tests", "compte"]
-order: "f14"
+order: "a4"
 ---
-
-# Prouver que la suppression de compte efface bien tout
+# 05 — Prouver que la suppression de compte efface bien tout
 
 **Ce que ca prend** : la route de `compte-04`.
 **Ce que ca retourne** : cinq tests.

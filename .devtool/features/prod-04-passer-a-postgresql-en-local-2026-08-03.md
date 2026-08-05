@@ -9,10 +9,9 @@ created: "2026-08-03T00:00:00.000Z"
 modified: "2026-08-03T00:00:00.000Z"
 completedAt: null
 labels: ["backend", "production"]
-order: "f63"
+order: "aL"
 ---
-
-# Remplacer SQLite par PostgreSQL sur ta machine
+# 22 — Remplacer SQLite par PostgreSQL sur ta machine
 
 **Ce que ca prend** : la configuration `DATABASES`.
 **Ce que ca retourne** : un environnement local identique a la production.

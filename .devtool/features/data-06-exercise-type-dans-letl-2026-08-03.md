@@ -9,10 +9,9 @@ created: "2026-08-03T00:00:00.000Z"
 modified: "2026-08-03T00:00:00.000Z"
 completedAt: null
 labels: ["backend", "data"]
-order: "f25"
+order: "af"
 ---
-
-# Completer `exercise_type` sur les exercices du catalogue
+# 42 — Completer `exercise_type` sur les exercices du catalogue
 
 **Ce que ca prend** : les 873 exercices en base, dont beaucoup ont un `exercise_type` vide
 ou par defaut.

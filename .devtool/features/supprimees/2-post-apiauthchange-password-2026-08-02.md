@@ -25,3 +25,9 @@ Trois champs en entrée, une vérification de l'ancien, et l'appel à `validate_
 Cette carte etait dans `done/`, mais `accounts/urls.py` ne declare que `login/`, `token/refresh/`, `register/` et `me/`. L'endpoint n'existe pas.
 
 Le travail est redecoupe en taches plus fines, `f10` a `f16`. Cette carte reste ici comme trace de l'intention initiale — **suis les tickets `f`**.
+
+---
+
+## Retiree du kanban le 04/08/2026
+
+Remplacee par les cartes 01 a 03, qui decoupent le changement de mot de passe en serialiseur, vue et tests.

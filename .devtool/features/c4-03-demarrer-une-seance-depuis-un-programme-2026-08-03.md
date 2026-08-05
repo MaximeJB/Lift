@@ -9,10 +9,9 @@ created: "2026-08-03T00:00:00.000Z"
 modified: "2026-08-03T00:00:00.000Z"
 completedAt: null
 labels: ["frontend", "ecran"]
-order: "f32"
+order: "aE"
 ---
-
-# Brancher « Demarrer ce programme » sur C5
+# 15 — Brancher « Demarrer ce programme » sur C5
 
 **Ce que ca prend** : un template affiche dans C4.
 **Ce que ca retourne** : une seance creee avec `template` renseigne, et C5 pre-remplie.

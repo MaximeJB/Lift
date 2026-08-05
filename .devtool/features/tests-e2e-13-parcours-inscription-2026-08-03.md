@@ -9,9 +9,9 @@ created: "2026-08-03T00:00:00.000Z"
 modified: "2026-08-03T00:00:00.000Z"
 completedAt: null
 labels: ["tests", "e2e"]
-order: "e13"
+order: "aj"
 ---
-# E2E 13 — parcours inscription et session
+# 46 — E2E 13 — parcours inscription et session
 
 **Objectif** : le premier parcours complet, du lancement a l'accueil.
 

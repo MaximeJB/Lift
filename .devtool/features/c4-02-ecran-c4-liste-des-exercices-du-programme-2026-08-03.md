@@ -9,10 +9,9 @@ created: "2026-08-03T00:00:00.000Z"
 modified: "2026-08-03T00:00:00.000Z"
 completedAt: null
 labels: ["frontend", "ecran"]
-order: "f31"
+order: "aD"
 ---
-
-# Remplir l'ecran C4 — le detail d'un programme
+# 14 — Remplir l'ecran C4 — le detail d'un programme
 
 **Ce que ca prend** : l'identifiant du template, recu en parametre de route.
 **Ce que ca retourne** : un ecran qui liste les exercices du programme, dans l'ordre.

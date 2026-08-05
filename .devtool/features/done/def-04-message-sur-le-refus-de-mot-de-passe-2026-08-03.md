@@ -9,9 +9,8 @@ created: "2026-08-03T00:00:00.000Z"
 modified: "2026-08-03T00:00:00.000Z"
 completedAt: "2026-08-03T00:00:00.000Z"
 labels: ["backend", "bug"]
-order: "f05"
+order: "aJ"
 ---
-
 # Donner un message lisible quand les deux mots de passe different
 
 **Ce que ca prend** : la methode `validate` de `UserRegistrationSerializer`.

@@ -9,7 +9,7 @@ created: "2026-07-28T13:44:07.667Z"
 modified: "2026-08-04T07:20:03.268Z"
 completedAt: "2026-08-04T07:20:03.268Z"
 labels: []
-order: "a0G"
+order: "a6"
 ---
 # 9. Créer le guard de navigation (Auth vs App)
 

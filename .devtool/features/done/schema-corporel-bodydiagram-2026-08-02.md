@@ -9,7 +9,7 @@ created: "2026-08-02T00:00:00.000Z"
 modified: "2026-08-04T07:20:06.336Z"
 completedAt: "2026-08-04T07:20:06.336Z"
 labels: ["avant-mvp", "bloquant-mvp", "design"]
-order: "a01"
+order: "aR"
 ---
 # À REVOIR AVANT LE MVP — Le schéma corporel (BodyDiagram)
 
@@ -53,3 +53,10 @@ assumé à la contrainte §12, tranché à l'atelier visuel.
    décider de la face (avant / arrière / les deux) de chacune.
 4. Seulement 124 exercices sur 873 ont des muscles secondaires renseignés — vérifier
    que le schéma reste lisible quand il n'y a qu'un muscle principal.
+---
+
+## Archivage errone, constate le 04/08/2026
+
+Cette carte etait dans `done/` alors que le code ne la porte pas. Aucun composant `BodyDiagram` dans `src/shared/components/`. Le travail est repris par les cartes 35 et 36.
+
+Elle reste ici comme trace de l'intention initiale.

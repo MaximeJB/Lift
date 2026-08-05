@@ -1,17 +1,16 @@
 ---
 id: "c4-01-service-api-des-templates-2026-08-03"
-status: "todo"
+status: "done"
 priority: "high"
 assignee: null
 epic: null
 dueDate: null
 created: "2026-08-03T00:00:00.000Z"
 modified: "2026-08-03T00:00:00.000Z"
-completedAt: null
+completedAt: "2026-08-04T00:00:00.000Z"
 labels: ["frontend", "api"]
-order: "f30"
+order: "a9"
 ---
-
 # Ecrire le service qui lit les templates
 
 **Ce que ca prend** : rien, ou un identifiant de template.
@@ -35,3 +34,9 @@ a afficher. Il faut d'abord la couche qui va la chercher.
 
 **Ressources** :
 - Recherche : `typescript nested type from drf nested serializer`
+
+---
+
+## Deja fait, constate le 04/08/2026
+
+`frontend/src/workout/services/templates.service.ts` expose `listTemplates()` et `getTemplate(id)`. Le service a ete ecrit en meme temps que les trois autres, dans la carte « les quatre services API ». Cette carte faisait doublon sans qu'on le voie.

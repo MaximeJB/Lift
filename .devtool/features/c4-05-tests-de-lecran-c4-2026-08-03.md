@@ -9,10 +9,9 @@ created: "2026-08-03T00:00:00.000Z"
 modified: "2026-08-03T00:00:00.000Z"
 completedAt: null
 labels: ["frontend", "tests"]
-order: "f34"
+order: "aG"
 ---
-
-# Couvrir C4 et remonter le seuil global
+# 17 — Couvrir C4 et remonter le seuil global
 
 **Ce que ca prend** : les tickets `c4-01` a `c4-04`.
 **Ce que ca retourne** : environ douze tests dans `src/ecrans/`, et un seuil de couverture

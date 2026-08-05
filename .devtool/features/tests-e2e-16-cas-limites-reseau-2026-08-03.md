@@ -9,9 +9,9 @@ created: "2026-08-03T00:00:00.000Z"
 modified: "2026-08-03T00:00:00.000Z"
 completedAt: null
 labels: ["tests", "e2e"]
-order: "e16"
+order: "am"
 ---
-# E2E 16 — cas limites reseau et session
+# 49 — E2E 16 — cas limites reseau et session
 
 **Objectif** : ce que les tests unitaires ne peuvent pas prouver — le comportement reel
 quand la connexion lache au mauvais moment.

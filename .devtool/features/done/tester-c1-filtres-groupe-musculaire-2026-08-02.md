@@ -9,7 +9,7 @@ created: "2026-08-02T00:00:00.000Z"
 modified: "2026-08-04T12:31:16.042Z"
 completedAt: "2026-08-04T12:31:16.042Z"
 labels: ["demain", "test", "c1"]
-order: "a004"
+order: "ak"
 ---
 # À TESTER — Les filtres par groupe musculaire (C1)
 

@@ -9,10 +9,9 @@ created: "2026-08-03T00:00:00.000Z"
 modified: "2026-08-03T00:00:00.000Z"
 completedAt: null
 labels: ["frontend"]
-order: "f33"
+order: "aF"
 ---
-
-# Utiliser le repos defini par le programme dans le minuteur de C5
+# 16 — Utiliser le repos defini par le programme dans le minuteur de C5
 
 **Ce que ca prend** : le champ `rest_seconds` de chaque `TemplateExercise`.
 **Ce que ca retourne** : un minuteur qui demarre a la bonne duree selon l'exercice.
